@@ -13,8 +13,8 @@ const SidebarRoutes = ({ device }: SidebarRoutesProps) => {
   return (
     <div
       className={cn(
-        'flex h-full w-full flex-col items-start gap-y-2',
-        device === 'desktop' && 'flex-row justify-center',
+        'flex w-full flex-col items-start gap-y-2',
+        device === 'desktop' && 'flex-row justify-center gap-x-4',
       )}
     >
       {routes.map((route) => (

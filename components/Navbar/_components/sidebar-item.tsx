@@ -27,7 +27,7 @@ const SidebarItem = ({ label, href, device }: SidebarItemProps) => {
         <div className='flex items-center'>{label}</div>
         <div
           className={cn(
-            'mt-auto w-full border-2 border-slate-400 opacity-0 transition-all',
+            'mt-auto w-full border-2 border-slate-400 opacity-0 transition-all duration-500',
             isActive && 'opacity-100',
           )}
         />
@@ -36,7 +36,7 @@ const SidebarItem = ({ label, href, device }: SidebarItemProps) => {
       <>
         <div
           className={cn(
-            'mr-auto h-full border-2 border-slate-400 opacity-0 transition-all',
+            'mr-auto h-full border-2 border-slate-400 opacity-0 transition-all duration-500',
             isActive && 'opacity-100',
           )}
         />
@@ -49,7 +49,7 @@ const SidebarItem = ({ label, href, device }: SidebarItemProps) => {
       onClick={onClick}
       type='button'
       className={cn(
-        'flex flex-row items-center px-3 text-lg font-[500] text-black transition-all duration-500 hover:text-slate-600',
+        'flex flex-row items-center text-lg font-[500] text-black transition-all duration-500 hover:text-slate-600',
         isActive && 'text-slate-700 hover:text-slate-600',
         device === 'desktop' && 'flex-col',
       )}

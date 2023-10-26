@@ -8,15 +8,15 @@ const Navbar = () => {
     <nav className='flexBetween max-container padding-container relative z-30 py-5'>
       <Link className='flex' href='/'>
         <Image
-          src='/logo.png'
+          src='/logo2.png'
           alt='logo'
-          width={60}
+          width={180}
           height={60}
-          className='h-auto w-auto'
+          className='aspect-auto h-auto w-auto'
           priority
         />
       </Link>
-      <div className='hidden lg:block'>
+      <div className='hidden lg:flex'>
         <SidebarRoutes device='desktop' />
       </div>
       <MobileSidebar />
