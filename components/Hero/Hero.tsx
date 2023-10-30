@@ -1,6 +1,6 @@
 const Hero = () => {
   return (
-    <div className='h-full p-6 text-white'>
+    <div className='h-[90vh] p-6 text-white'>
       <div className='flex h-full flex-col justify-evenly font-bebas_neue text-9xl max-md:items-center max-md:text-6xl'>
         <h1>
           <span className='text-gradient-color bg-gradient-to-r from-red-600 from-15% to-yellow-500 to-90% text-transparent'>

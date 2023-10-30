@@ -1,11 +1,11 @@
 import Navbar from '@/components/Navbar';
 import './globals.css';
 import type { Metadata } from 'next';
-import { Inter } from 'next/font/google';
+// import { Inter } from 'next/font/google';
 import Footer from '@/components/Footer';
 import YoutubeBackground from '@/components/YoutubeBackground';
 
-const inter = Inter({ subsets: ['latin'] });
+// const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
   title: '專心練運動空間',
@@ -16,13 +16,13 @@ export const metadata: Metadata = {
 const RootLayout = ({ children }: { children: React.ReactNode }) => {
   return (
     <html lang='zh-TW'>
-      <body className={inter.className}>
+      <body className='h-auto'>
         <div className='w-full bg-white'>
           <Navbar />
         </div>
         <main className='h-full'>{children}</main>
-        <YoutubeBackground />
         <Footer />
+        <YoutubeBackground />
       </body>
     </html>
   );
