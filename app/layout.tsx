@@ -3,6 +3,7 @@ import './globals.css';
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import Footer from '@/components/Footer';
+import YoutubeBackground from '@/components/YoutubeBackground';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -16,8 +17,11 @@ const RootLayout = ({ children }: { children: React.ReactNode }) => {
   return (
     <html lang='zh-TW'>
       <body className={inter.className}>
-        <Navbar />
-        <main className='relative overflow-hidden'>{children}</main>
+        <div className='w-full bg-white'>
+          <Navbar />
+        </div>
+        <main className='h-full'>{children}</main>
+        <YoutubeBackground />
         <Footer />
       </body>
     </html>
