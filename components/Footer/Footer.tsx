@@ -10,6 +10,7 @@ const Footer = () => {
           width={180}
           height={60}
           className='h-auto w-auto'
+          priority
         />
         <div className='flex flex-col items-center justify-center p-4'>
           <h1 className='text-4xl tracking-wide max-md:text-2xl'>聯絡我們</h1>

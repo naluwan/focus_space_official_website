@@ -45,6 +45,7 @@ const Introduce = () => {
                       src={item.icon}
                       alt='fbBtn'
                       className='h-8 w-8 group-hover:opacity-80'
+                      priority
                     />
                   </a>
                 </div>
