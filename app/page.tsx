@@ -1,5 +1,13 @@
+import Hero from '@/components/Hero';
+import Introduce from '@/components/Introduce';
+
 const Home = () => {
-  return <div className='font-bold text-teal-500'>Hello World</div>;
+  return (
+    <>
+      <Hero />
+      <Introduce />
+    </>
+  );
 };
 
 export default Home;
