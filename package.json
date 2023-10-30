@@ -6,13 +6,16 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "predeploy": "npm run build && touch ./out/.nojekyll",
+    "deploy": "gh-pages -d out -t true"
   },
   "dependencies": {
     "@radix-ui/react-dialog": "^1.0.4",
     "@uploadthing/react": "^5.7.0",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.0.0",
+    "gh-pages": "^6.0.0",
     "lucide-react": "^0.289.0",
     "next": "latest",
     "react": "latest",
@@ -42,5 +45,8 @@
     "prettier-plugin-tailwindcss": "^0.4.1",
     "tailwindcss": "latest",
     "typescript": "latest"
+  },
+  "engines": {
+    "node": "18.18.0"
   }
 }
