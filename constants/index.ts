@@ -1,5 +1,4 @@
 export const NAV_LINKS = [
-  { href: '/', key: 'home', label: '首頁' },
   { href: '/about', key: 'about', label: '關於我們' },
   { href: '/class', key: 'class', label: '專心練課程' },
   { href: '/coach', key: 'coach', label: '教練陣容' },

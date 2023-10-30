@@ -5,7 +5,7 @@ import SidebarRoutes from './_components/sidebar-routes';
 
 const Navbar = () => {
   return (
-    <nav className='flexBetween max-container padding-container relative z-30 py-5'>
+    <nav className='flexBetween max-container padding-container relative z-30 bg-white'>
       <Link className='flex' href='/'>
         <Image
           src='/logo2.png'
