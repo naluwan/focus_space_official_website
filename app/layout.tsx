@@ -21,7 +21,9 @@ const RootLayout = ({ children }: { children: React.ReactNode }) => {
           <Navbar />
         </div>
         <main className='h-full'>{children}</main>
-        <Footer />
+        <div className='w-full bg-white'>
+          <Footer />
+        </div>
         <YoutubeBackground />
       </body>
     </html>
