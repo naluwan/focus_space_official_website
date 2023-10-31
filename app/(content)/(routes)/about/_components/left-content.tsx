@@ -16,13 +16,14 @@ const LeftContent = ({ img, title, content }: LeftContentProps) => {
           width={300}
           height={300}
           className='aspect-square h-auto max-h-[800px] w-full object-cover'
+          priority
         />
       </div>
 
       <div className='flex w-full items-center justify-center p-6 md:order-1'>
         <div className='flex flex-col items-start justify-center xl:max-w-[50%]'>
           <h1 className='mb-4 text-4xl'>{title}</h1>
-          <p>{content}</p>
+          <p className='leading-loose'>{content}</p>
         </div>
       </div>
     </div>

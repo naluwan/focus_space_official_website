@@ -1,6 +1,28 @@
 import Image from 'next/image';
+import fbIcon from '@/public/fbIcon.png';
+import igIcon from '@/public/igIcon.png';
+import lineIcon from '@/public/lineIcon.png';
+import { cn } from '@/lib/utils';
 
 const Footer = () => {
+  const socialMediaData = [
+    {
+      title: 'facebook',
+      src: 'https://www.facebook.com/profile.php?id=100088179318429',
+      icon: fbIcon,
+    },
+    {
+      title: 'instagram',
+      src: 'https://www.instagram.com/focus_space_banqiao/',
+      icon: igIcon,
+    },
+    {
+      title: 'line',
+      src: 'https://line.me/R/ti/p/@565osqjq?from=page&openQrModal=true&searchId=565osqjq',
+      icon: lineIcon,
+    },
+  ];
+
   return (
     <div className='max-container padding-container h-auto bg-white py-4 text-black'>
       <div className='flex justify-evenly max-md:flex-col max-md:items-center'>
@@ -19,6 +41,24 @@ const Footer = () => {
             <p>可私訊Focus_Space粉絲專頁或E-mail，我們將盡快回覆</p>
             <p>Focus_Space 官方Line：@565osqjq</p>
             <p>Focus_Space E-mail：focusspace4648@gmail.com</p>
+            <div className='flex items-center justify-start gap-x-2'>
+              {socialMediaData.map((item) => (
+                <div className='group' key={item.title}>
+                  <a href={item.src} target='_black'>
+                    <Image
+                      src={item.icon}
+                      alt='fbBtn'
+                      className={cn(
+                        'h-8 w-8 transition-all duration-300 group-hover:scale-110',
+                        item.title === 'line' && 'h-11 w-11',
+                        item.title === 'facebook' && 'mr-2',
+                      )}
+                      priority
+                    />
+                  </a>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </div>
