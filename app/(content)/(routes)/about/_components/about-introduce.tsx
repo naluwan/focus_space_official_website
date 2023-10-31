@@ -3,13 +3,13 @@ import Image from 'next/image';
 const AboutIntroduce = () => {
   return (
     <div className='max-container mt-8 flex flex-col bg-black p-6 md:flex-row'>
-      <div className='flex w-full flex-col items-center justify-center gap-y-2 p-4 md:order-2'>
+      <div className='flex w-full flex-col items-center justify-center gap-y-2 p-0 md:order-2 md:p-4'>
         <Image
           src='/founder.jpg'
           alt='gym photo'
           width={300}
           height={300}
-          className='aspect-square h-auto max-h-[800px] w-full object-contain'
+          className='aspect-square w-full object-contain'
         />
         <p className='text-xs md:text-base'>FOCUS_SPACE 專心練運動空間 執行長</p>
       </div>

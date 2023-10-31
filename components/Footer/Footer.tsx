@@ -62,7 +62,7 @@ const Footer = () => {
           </div>
         </div>
       </div>
-      <div className='flex flex-col items-center justify-center p-4 text-sm max-md:text-[10px]'>
+      <div className='flex flex-col items-center justify-center pt-4 text-sm max-md:text-[10px]'>
         <p className='m-0'>專心練股份有限公司 版權所有</p>
         <p className='m-0'>Copyright 2023 © FOCUS_SPACE Co. Ltd. All rights reserved.</p>
         <p className='m-0'>Powered by NaLuWan</p>
