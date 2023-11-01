@@ -41,7 +41,7 @@ const Footer = () => {
             <p>可私訊Focus_Space粉絲專頁或E-mail，我們將盡快回覆</p>
             <p>Focus_Space 官方Line：@565osqjq</p>
             <p>Focus_Space E-mail：focusspace4648@gmail.com</p>
-            <div className='flex items-center justify-start gap-x-2'>
+            <div className='flex items-center justify-center gap-x-2 md:justify-start'>
               {socialMediaData.map((item) => (
                 <div className='group' key={item.title}>
                   <a href={item.src} target='_black'>
