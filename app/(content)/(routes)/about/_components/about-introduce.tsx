@@ -1,6 +1,7 @@
 import Image from 'next/image';
+import React from 'react';
 
-const AboutIntroduce = () => {
+const AboutIntroduce = React.forwardRef<HTMLDivElement, unknown>((props, ref) => {
   return (
     <div className='max-container mt-8 flex flex-col bg-black p-6 md:flex-row'>
       <div className='flex w-full flex-col items-center justify-center gap-y-2 p-0 md:order-2 md:p-4'>
@@ -14,7 +15,7 @@ const AboutIntroduce = () => {
         <p className='text-xs md:text-base'>FOCUS_SPACE 專心練運動空間 執行長</p>
       </div>
 
-      <div className='flex w-full items-start justify-center p-4 md:order-1'>
+      <div className='flex w-full items-start justify-center p-4 md:order-1' ref={ref}>
         <div className='flex flex-col items-start justify-center'>
           <h1 className='mb-2 text-xl'>創辦人</h1>
           <h1 className='mb-4 text-4xl font-bold'>
@@ -50,6 +51,8 @@ const AboutIntroduce = () => {
       </div>
     </div>
   );
-};
+});
+
+AboutIntroduce.displayName = 'AboutIntroduce';
 
 export default AboutIntroduce;
