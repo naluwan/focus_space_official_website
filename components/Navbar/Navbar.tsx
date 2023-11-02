@@ -5,7 +5,7 @@ import Logo from './_components/logo';
 
 const Navbar = () => {
   return (
-    <nav className='flexBetween max-container padding-container relative bg-white'>
+    <nav className='flexBetween max-container relative bg-white px-4'>
       <Link className='flex' href='/'>
         <Logo />
       </Link>
