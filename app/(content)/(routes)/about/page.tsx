@@ -8,7 +8,7 @@ import AboutIntroduce from './_components/about-introduce';
 import heroImg1 from '@/public/aboutHero.jpeg';
 import heroImg2 from '@/public/aboutHero2.jpg';
 import React from 'react';
-import { ArrowUpFromLine } from 'lucide-react';
+import ScrollToTop from '@/components/ScrollToTop';
 
 export interface IRef {
   getCreateDiv: () => HTMLDivElement;
@@ -20,24 +20,14 @@ const AboutPage = () => {
   const founderRef = React.useRef<HTMLDivElement>(null);
 
   return (
-    <div className='relative h-full bg-black text-white'>
+    <div className='h-full bg-black text-white'>
       {/* TODO:導覽列 */}
       <AboutNavigateBar founderRef={founderRef} aboutRef={aboutRef} />
       <AboutHero img={heroImg1} title='about us' />
       <AboutUs ref={aboutRef} />
       <AboutHero img={heroImg2} title='founder' />
       <AboutIntroduce ref={founderRef} />
-      <button
-        className='sticky bottom-4 left-[95%] flex items-center justify-center rounded-full bg-[#FFD531] p-3'
-        onClick={() =>
-          window.scrollTo({
-            top: 0,
-            behavior: 'smooth',
-          })
-        }
-      >
-        <ArrowUpFromLine className='h-8 w-8' />
-      </button>
+      <ScrollToTop />
     </div>
   );
 };
