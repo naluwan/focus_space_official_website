@@ -8,6 +8,7 @@ import AboutIntroduce from './_components/about-introduce';
 import heroImg1 from '@/public/aboutHero.jpeg';
 import heroImg2 from '@/public/aboutHero2.jpg';
 import React from 'react';
+import { ArrowUpFromLine } from 'lucide-react';
 
 export interface IRef {
   getCreateDiv: () => HTMLDivElement;
@@ -26,6 +27,17 @@ const AboutPage = () => {
       <AboutUs ref={aboutRef} />
       <AboutHero img={heroImg2} title='founder' />
       <AboutIntroduce ref={founderRef} />
+      <button
+        className='sticky bottom-4 left-[95%] flex items-center justify-center rounded-full bg-[#FFD531] p-3'
+        onClick={() =>
+          window.scrollTo({
+            top: 0,
+            behavior: 'smooth',
+          })
+        }
+      >
+        <ArrowUpFromLine className='h-8 w-8' />
+      </button>
     </div>
   );
 };
