@@ -1,8 +1,17 @@
-import fbBtn from '@/public/fbBtn.png';
-import igBtn from '@/public/igBtn.png';
+'use client';
+import React from 'react';
 import Image from 'next/image';
 
+import fbBtn from '@/public/fbBtn.png';
+import igBtn from '@/public/igBtn.png';
+
+import Aos from 'aos';
+
 const Introduce = () => {
+  React.useEffect(() => {
+    Aos.init();
+  }, []);
+
   const socialMediaData = [
     {
       title: 'facebook',
@@ -19,7 +28,12 @@ const Introduce = () => {
     <>
       {/* first */}
       <div className='flex h-auto w-full flex-col gap-y-4 p-6 text-white'>
-        <div className='flex max-w-[45%] flex-col rounded-3xl bg-black/50 p-8 font-bold backdrop-blur-2xl max-md:w-full max-md:max-w-none'>
+        <div
+          className='flex max-w-[45%] flex-col rounded-3xl bg-black/50 p-8 font-bold backdrop-blur-2xl max-md:w-full max-md:max-w-none'
+          data-aos='fade-right'
+          data-aos-duration={700}
+          data-aos-once
+        >
           <div className='text-7xl uppercase max-md:text-5xl'>Focus</div>
           <div className='mb-6 text-4xl uppercase max-md:text-2xl'>專心於你的訓練</div>
           <div className='mb-6'>
@@ -57,7 +71,12 @@ const Introduce = () => {
 
       {/* second */}
       <div className='flex h-auto w-full flex-col items-end gap-y-4 p-6 text-white'>
-        <div className='flex w-[45%] max-w-[45%] flex-col rounded-3xl bg-black/50 p-8 font-bold backdrop-blur-2xl max-md:w-full max-md:max-w-none'>
+        <div
+          className='flex w-[45%] max-w-[45%] flex-col rounded-3xl bg-black/50 p-8 font-bold backdrop-blur-2xl max-md:w-full max-md:max-w-none'
+          data-aos='fade-left'
+          data-aos-duration={700}
+          data-aos-once
+        >
           <div className='text-7xl uppercase max-md:text-5xl'>Space</div>
           <div className='mb-6 text-4xl uppercase max-md:text-2xl'>最懂你的健身房</div>
           <div className='mb-6'>

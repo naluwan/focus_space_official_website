@@ -2,11 +2,19 @@ import Image, { StaticImageData } from 'next/image';
 
 import { Dialog, DialogContent, DialogTrigger } from '@/components/ui/dialog';
 
+import Aos from 'aos';
+import React from 'react';
+
 interface CoachImageProps {
   img: StaticImageData;
+  delay: number;
 }
 
-const CoachImage = ({ img }: CoachImageProps) => {
+const CoachImage = ({ img, delay }: CoachImageProps) => {
+  React.useEffect(() => {
+    Aos.init();
+  }, []);
+
   return (
     <Dialog>
       <Image
@@ -15,6 +23,10 @@ const CoachImage = ({ img }: CoachImageProps) => {
         height={200}
         width={300}
         className='block h-[300px] w-[400px] transition-all duration-500 hover:scale-110 md:hidden'
+        data-aos='fade-up'
+        data-aos-anchor-placement='center-bottom'
+        data-aos-once
+        data-aos-duration={700}
         priority
       />
       <DialogTrigger asChild className='hidden md:block'>
@@ -25,6 +37,10 @@ const CoachImage = ({ img }: CoachImageProps) => {
             height={200}
             width={300}
             className='h-[300px] w-[400px] transition-all duration-500 hover:scale-110'
+            data-aos='flip-up'
+            data-aos-delay={delay}
+            data-aos-once
+            data-aos-duration={1000}
             priority
           />
         </button>

@@ -6,6 +6,8 @@ import { StaticImageData } from 'next/image';
 import { Button } from '@/components/ui/button';
 import ScrollToTop from '@/components/ScrollToTop';
 
+import Aos from 'aos';
+
 type PaginationType = {
   pages: number[];
   totalPage: number;
@@ -53,6 +55,11 @@ const CoachPage = () => {
     [],
   );
 
+  // 初始化捲軸動畫
+  React.useEffect(() => {
+    Aos.init();
+  }, []);
+
   // 獲取該分頁的教練資料
   React.useEffect(() => {
     setFilteredData(COACH_DATA.slice(offset, offset + limit));
@@ -72,18 +79,25 @@ const CoachPage = () => {
   return (
     <div className='flex h-auto flex-col items-center bg-black p-4 text-white'>
       <div className='max-container flex flex-wrap justify-evenly gap-4 md:grid md:grid-cols-3'>
-        {currentData.map((coach) => (
-          <CoachImage img={coach.img} key={coach.key} />
-        ))}
+        {currentData.map((coach, idx) => {
+          const delayData = [100, 200, 300, 400, 500, 600, 700, 800, 900];
+          const delay = delayData[idx % delayData.length];
+          console.log(`[${idx} element]`, delay);
+          return <CoachImage img={coach.img} key={coach.key} delay={delay} />;
+        })}
       </div>
 
-      <div className='mt-10 w-[15rem] p-4'>
+      <div className='mt-10'>
         <Button
-          className='w-full text-base'
+          className='h-20 w-20 rounded-full bg-[#E81E26] text-sm font-extrabold tracking-widest ring-4 ring-transparent transition-all duration-300 hover:bg-[#E81E26] hover:ring-[#E81E26]/40'
           disabled={!pagination?.hasNextPage}
           onClick={() => setPage(page + 1)}
+          data-aos='fade-up'
+          data-aos-duration={700}
+          data-aos-anchor-placement='center-bottom'
+          data-aos-once
         >
-          {pagination?.hasNextPage ? '看更多' : '沒有更多了...'}
+          {pagination?.hasNextPage ? '載入更多' : '沒有更多'}
         </Button>
       </div>
       <ScrollToTop />
