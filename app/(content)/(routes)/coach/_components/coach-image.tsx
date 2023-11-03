@@ -29,7 +29,7 @@ const CoachImage = ({ img }: CoachImageProps) => {
           />
         </button>
       </DialogTrigger>
-      <DialogContent className='flex max-h-[750px] max-w-[970px] items-center justify-center max-md:hidden'>
+      <DialogContent className='flex max-h-[750px] max-w-[970px] items-center justify-center data-[state=open]:duration-500 max-md:hidden '>
         <Image
           src={img}
           alt='coach image'
