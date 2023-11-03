@@ -26,7 +26,6 @@ const CoachImage = ({ img, delay }: CoachImageProps) => {
         data-aos='fade-up'
         data-aos-anchor-placement='center-bottom'
         data-aos-once
-        data-aos-duration={700}
         priority
       />
       <DialogTrigger asChild className='hidden md:block'>
@@ -40,7 +39,6 @@ const CoachImage = ({ img, delay }: CoachImageProps) => {
             data-aos='flip-up'
             data-aos-delay={delay}
             data-aos-once
-            data-aos-duration={1000}
             priority
           />
         </button>

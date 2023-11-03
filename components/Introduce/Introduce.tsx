@@ -31,7 +31,7 @@ const Introduce = () => {
         <div
           className='flex max-w-[45%] flex-col rounded-3xl bg-black/50 p-8 font-bold backdrop-blur-2xl max-md:w-full max-md:max-w-none'
           data-aos='fade-right'
-          data-aos-duration={700}
+          data-aos-duration={300}
           data-aos-once
         >
           <div className='text-7xl uppercase max-md:text-5xl'>Focus</div>
@@ -74,7 +74,7 @@ const Introduce = () => {
         <div
           className='flex w-[45%] max-w-[45%] flex-col rounded-3xl bg-black/50 p-8 font-bold backdrop-blur-2xl max-md:w-full max-md:max-w-none'
           data-aos='fade-left'
-          data-aos-duration={700}
+          data-aos-duration={300}
           data-aos-once
         >
           <div className='text-7xl uppercase max-md:text-5xl'>Space</div>
