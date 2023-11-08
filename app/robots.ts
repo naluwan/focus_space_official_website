@@ -6,6 +6,6 @@ export default function robots(): MetadataRoute.Robots {
       userAgent: '*',
       allow: '/',
     },
-    sitemap: 'https://www.naluwan.website/sitemap2.xml',
+    sitemap: 'https://www.naluwan.website/sitemap.xml',
   };
 }
