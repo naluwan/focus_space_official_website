@@ -7,9 +7,6 @@ interface AboutNavigateBarProps {
 }
 
 const AboutNavigateBar = ({ aboutRef, founderRef }: AboutNavigateBarProps) => {
-  console.log('[aboutRef]', aboutRef);
-  console.log('[founderRef]', founderRef);
-
   const scrollToCreate = () => {
     aboutRef.current?.getCreateDiv().scrollIntoView({ behavior: 'smooth' });
   };

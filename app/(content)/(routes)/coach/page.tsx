@@ -82,7 +82,6 @@ const CoachPage = () => {
         {currentData.map((coach, idx) => {
           const delayData = [100, 200, 300, 400, 500, 600, 700, 800, 900];
           const delay = delayData[idx % delayData.length];
-          console.log(`[${idx} element]`, delay);
           return <CoachImage img={coach.img} key={coach.key} delay={delay} />;
         })}
       </div>
