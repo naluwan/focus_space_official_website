@@ -8,9 +8,34 @@ import YoutubeBackground from '@/components/YoutubeBackground';
 // const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
-  title: 'Focus Space | 專心練運動空間',
+  title: {
+    default: 'Focus Space | 專心練運動空間',
+    template: '%s | Focus Space | 專心練運動空間',
+  },
   description:
     '板橋市中心最方便親民健身房，捷運新埔站五號出口，單次入場|分鐘計時|月票季票制，私人課程|團體課程|獨立授課區，場地租借|不綁約制|無需入會費，官方Line @565osqjq',
+  keywords: [
+    '新埔站',
+    '健身房',
+    'focus space',
+    'Focus Space',
+    'FOCUS SPACE',
+    '專心練',
+    '運動空間',
+    '專心練運動空間',
+    '單次',
+    '分鐘',
+    '月票',
+    '計票',
+    '私人課程',
+    '私課',
+    '團體課程',
+    '團課',
+    '場地租借',
+    '租場地',
+    '不綁約',
+    '無需入會費',
+  ],
 };
 
 const RootLayout = ({ children }: { children: React.ReactNode }) => {
