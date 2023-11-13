@@ -17,6 +17,10 @@ const SidebarItem = ({ label, href, device }: SidebarItemProps) => {
     pathName === href ||
     pathName?.startsWith(`${href}/`);
 
+  console.log('[path name]', pathName);
+  console.log('[href]', href);
+  console.log('[isActive]', isActive);
+
   const onClick = () => {
     router.push(href);
   };
@@ -49,7 +53,7 @@ const SidebarItem = ({ label, href, device }: SidebarItemProps) => {
       onClick={onClick}
       type='button'
       className={cn(
-        'flex flex-row items-center text-lg font-[500] text-black transition-all duration-500 hover:text-slate-600',
+        'flex flex-row items-center text-lg font-[500] text-black outline-none transition-all duration-500 hover:text-slate-600',
         isActive && 'text-slate-700 hover:text-slate-600',
         device === 'desktop' && 'flex-col',
       )}
