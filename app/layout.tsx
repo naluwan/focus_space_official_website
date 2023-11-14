@@ -1,3 +1,4 @@
+/* eslint-disable quotes */
 import Navbar from '@/components/Navbar';
 import './globals.css';
 import type { Metadata } from 'next';
@@ -9,8 +10,8 @@ import YoutubeBackground from '@/components/YoutubeBackground';
 
 export const metadata: Metadata = {
   title: {
-    default: 'Focus Space | 專心練 &nbsp;|&nbsp; 健身房 &nbsp;| 運動空間',
-    template: '%s &nbsp;| Focus Space | 專心練',
+    default: `Focus Space | 專心練 | 健身房 | 運動空間`,
+    template: `%s | Focus Space | 專心練`,
   },
   description:
     '板橋市中心最方便親民健身房、運動空間，FOCUS SPACE 專心練，捷運新埔站五號出口，單次入場|分鐘計時|月票季票制，私人課程|團體課程|獨立授課區，場地租借|不綁約制|無需入會費，官方Line @565osqjq',

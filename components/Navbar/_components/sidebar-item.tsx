@@ -17,10 +17,6 @@ const SidebarItem = ({ label, href, device }: SidebarItemProps) => {
     pathName === href ||
     pathName?.startsWith(`${href}/`);
 
-  console.log('[path name]', pathName);
-  console.log('[href]', href);
-  console.log('[isActive]', isActive);
-
   const onClick = () => {
     router.push(href);
   };
