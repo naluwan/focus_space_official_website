@@ -20,26 +20,28 @@ const CoachImage = ({ img, delay }: CoachImageProps) => {
       <Image
         src={img}
         alt='coach image'
-        height={200}
-        width={300}
+        height={300}
+        width={400}
         className='block h-[300px] w-[400px] transition-all duration-500 hover:scale-110 md:hidden'
         data-aos='fade-up'
         data-aos-anchor-placement='center-bottom'
         data-aos-once
-        priority
+        priority={true}
+        placeholder='blur'
       />
       <DialogTrigger asChild className='hidden md:block'>
         <button>
           <Image
             src={img}
             alt='coach image'
-            height={200}
-            width={300}
+            height={300}
+            width={400}
             className='h-[300px] w-[400px] transition-all duration-500 hover:scale-110'
             data-aos='flip-up'
             data-aos-delay={delay}
             data-aos-once
-            priority
+            priority={true}
+            placeholder='blur'
           />
         </button>
       </DialogTrigger>
@@ -50,7 +52,7 @@ const CoachImage = ({ img, delay }: CoachImageProps) => {
           height={200}
           width={300}
           className='h-auto w-[90%] md:h-[700px] md:w-[900px]'
-          priority
+          priority={true}
         />
       </DialogContent>
     </Dialog>
