@@ -1,7 +1,8 @@
 'use client';
 
 import { cn } from '@/lib/utils';
-import { usePathname, useRouter } from 'next/navigation';
+import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 
 interface SidebarItemProps {
   label: string;
@@ -10,16 +11,11 @@ interface SidebarItemProps {
 }
 const SidebarItem = ({ label, href, device }: SidebarItemProps) => {
   const pathName = usePathname();
-  const router = useRouter();
 
   const isActive =
     (pathName === '/' && href === '/') ||
     pathName === href ||
     pathName?.startsWith(`${href}/`);
-
-  const onClick = () => {
-    router.push(href);
-  };
 
   const ItemContent =
     device === 'desktop' ? (
@@ -45,8 +41,8 @@ const SidebarItem = ({ label, href, device }: SidebarItemProps) => {
     );
 
   return (
-    <button
-      onClick={onClick}
+    <Link
+      href={`${href}`}
       type='button'
       className={cn(
         'flex flex-row items-center text-lg font-[500] text-black outline-none transition-all duration-500 hover:text-slate-600',
@@ -55,7 +51,7 @@ const SidebarItem = ({ label, href, device }: SidebarItemProps) => {
       )}
     >
       {ItemContent}
-    </button>
+    </Link>
   );
 };
 
