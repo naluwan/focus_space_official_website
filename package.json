@@ -6,9 +6,10 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build && touch ./out/.nojekyll",
-    "start": "next start",
+    "start": "npx serve@latest out",
     "lint": "next lint",
     "predeploy": "npm run build",
+    "heroku-postbuild": "npm run build",
     "deploy": "gh-pages -d out -t true"
   },
   "dependencies": {
