@@ -2,6 +2,7 @@ import Image from 'next/image';
 import fbIcon from '@/public/fbIcon.png';
 import igIcon from '@/public/igIcon.png';
 import lineIcon from '@/public/lineIcon.png';
+import footerIcon from '@/public/footerLogo.png';
 import { cn } from '@/lib/utils';
 
 const Footer = () => {
@@ -27,11 +28,11 @@ const Footer = () => {
     <div className='max-container padding-container h-auto bg-white py-4 text-black'>
       <div className='flex justify-evenly max-md:flex-col max-md:items-center'>
         <Image
-          src='/footerLogo.png'
+          src={footerIcon}
           alt='footer logo'
           width={180}
           height={60}
-          className='h-auto w-auto'
+          className='h-[200px] w-[192px]'
           priority
         />
         <div className='flex flex-col items-center justify-center p-4'>

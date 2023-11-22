@@ -1,14 +1,15 @@
 {
+  "homepage": "https://naluwan.github.io/focus_space_official_website/",
   "name": "nextjs-practice",
   "version": "0.1.0",
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+    "build": "next build && touch ./out/.nojekyll",
     "start": "next start",
     "lint": "next lint",
-    "predeploy": "npm run build && npm export",
-    "deploy": "gh-pages -d .next"
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d out -t true"
   },
   "dependencies": {
     "@radix-ui/react-dialog": "^1.0.4",
@@ -22,6 +23,7 @@
     "next": "^13.5.4",
     "react": "latest",
     "react-dom": "latest",
+    "sharp": "^0.32.6",
     "tailwind-merge": "^1.14.0",
     "tailwindcss-animate": "^1.0.7",
     "touch-cli": "^0.0.1",

@@ -2,7 +2,7 @@
 
 import { cn } from '@/lib/utils';
 import SidebarItem from './sidebar-item';
-import { NAV_LINKS } from '@/constants';
+import { NAV_LINKS } from '@/public/constants';
 
 interface SidebarRoutesProps {
   device: string;

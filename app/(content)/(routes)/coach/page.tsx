@@ -1,5 +1,5 @@
 'use client';
-import { COACH_DATA } from '@/constants';
+import { COACH_DATA } from '@/public/constants';
 import CoachImage from './_components/coach-image';
 import React from 'react';
 import { StaticImageData } from 'next/image';

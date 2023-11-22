@@ -1,12 +1,13 @@
 import Image from 'next/image';
 import React from 'react';
+import founder from '@/public/founder.jpg';
 
 const AboutIntroduce = React.forwardRef<HTMLDivElement, unknown>((props, ref) => {
   return (
     <div className='max-container mt-8 flex flex-col bg-black p-6 md:flex-row'>
       <div className='flex w-full flex-col items-center justify-center gap-y-2 p-0 md:order-2 md:p-4'>
         <Image
-          src='/founder.jpg'
+          src={founder}
           alt='gym photo'
           width={300}
           height={300}
