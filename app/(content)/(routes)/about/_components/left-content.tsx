@@ -10,8 +10,8 @@ interface LeftContentProps {
 const LeftContent = React.forwardRef<HTMLDivElement, LeftContentProps>(
   ({ img, title, content }, ref) => {
     return (
-      <div className='flex flex-col bg-black md:grid md:grid-cols-2' ref={ref}>
-        <div className='w-full md:order-2'>
+      <div className='flex flex-col bg-black md:grid md:grid-cols-2'>
+        <div className='w-full md:order-2' ref={ref}>
           <Image
             src={img}
             alt='gym photo'

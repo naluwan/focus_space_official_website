@@ -32,7 +32,7 @@ const AboutNavigateBar = ({ aboutRef, founderRef }: AboutNavigateBarProps) => {
           className='transition-all delay-200 duration-500 hover:scale-110'
           onClick={scrollToIntroduce}
         >
-          健身房簡介
+          品牌理念
         </button>
         <button
           className='transition-all delay-200 duration-500 hover:scale-110'

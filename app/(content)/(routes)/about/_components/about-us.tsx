@@ -28,8 +28,8 @@ const AboutUs = React.forwardRef<IRef>((props, ref) => {
       />
       <LeftContent
         img={gymPhoto2}
-        title='健身房簡介'
-        content='FOCUS_SPACE 專心練運動空間擁有300坪大空間重量訓練區、齊全的有氧設備並附有淋浴區及休息區，專屬的APP條碼入場，不綁約、單次入場、分鐘入場，讓你更靈活的安排運動時間。'
+        title='品牌理念'
+        content='FOCUS_SPACE 專心練運動空間提供所有會員「在好的運動空間專心練」，主打交通便利的大坪數的空間，無壓力、無綁約、無推銷，以寬敞舒適的環境、公開透明的收費、友善親切的服務、專業細心的教學，來幫助會員在每一次的巡練及課程中達到自我理想獲得強健的身心。'
         ref={introduceRef}
       />
     </>
