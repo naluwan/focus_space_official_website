@@ -66,6 +66,13 @@ const MobileSidebar = () => {
               })}
             </div>
           </div>
+          <div className='flex flex-col items-center justify-center py-2 text-sm max-md:text-[10px]'>
+            <p className='m-0'>專心練股份有限公司 版權所有</p>
+            <p className='m-0'>
+              Copyright 2023 &copy; FOCUS_SPACE Co. Ltd. All rights reserved.
+            </p>
+            <p className='m-0'>Powered by NaLuWan</p>
+          </div>
         </div>
       </SheetContent>
     </Sheet>
