@@ -44,8 +44,8 @@ export const metadata: Metadata = {
 
 const RootLayout = ({ children }: { children: React.ReactNode }) => {
   return (
-    <html lang='zh-TW'>
-      <body className='hide-scrollbar h-auto'>
+    <html lang='zh-TW' className='hide-scrollbar'>
+      <body className='h-auto'>
         <div className='w-full bg-white'>
           <Navbar />
         </div>
