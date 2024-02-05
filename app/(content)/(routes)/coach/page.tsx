@@ -79,16 +79,20 @@ const CoachPage = () => {
   return (
     <div className='flex h-auto flex-col items-center bg-black p-4 text-white'>
       <div className='max-container flex flex-wrap justify-evenly gap-4 md:grid md:grid-cols-3'>
-        {currentData.map((coach, idx) => {
-          const delayData = [100, 200, 300, 400, 500, 600, 700, 800, 900];
-          const delay = delayData[idx % delayData.length];
-          return <CoachImage img={coach.img} key={coach.key} delay={delay} />;
-        })}
+        {currentData.length > 0 ? (
+          currentData.map((coach, idx) => {
+            const delayData = [100, 200, 300, 400, 500, 600, 700, 800, 900];
+            const delay = delayData[idx % delayData.length];
+            return <CoachImage img={coach.img} key={coach.key} delay={delay} />;
+          })
+        ) : (
+          <div className='h-full w-full'>載入中</div>
+        )}
       </div>
 
       <div className='mt-10'>
         <Button
-          className='h-20 w-20 rounded-full bg-[#E81E26] text-sm font-extrabold tracking-widest ring-4 ring-transparent transition-all duration-300 hover:bg-[#E81E26] hover:ring-[#E81E26]/40'
+          className='h-20 w-20 rounded-full bg-[#E81E26] text-sm font-extrabold tracking-widest ring-4 ring-transparent transition-all duration-300 hover:bg-[#E81E26] hover:ring-[#E81E26]/40 disabled:bg-[#E81E26]/80'
           disabled={!pagination?.hasNextPage}
           onClick={() => setPage(page + 1)}
           data-aos='fade-up'
