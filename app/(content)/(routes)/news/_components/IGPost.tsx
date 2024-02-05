@@ -200,7 +200,7 @@ const IGPost = ({
                     )}
                   </div>
                   {/* post文字 */}
-                  <div className='max-h-[750px] w-[70%] overflow-y-auto py-8'>
+                  <div className='max-h-[750px] w-[65%] overflow-y-auto py-8'>
                     <div className='flex w-1/2 items-center justify-between'>
                       <p>{new Date(timestamp).toLocaleDateString()}</p>
                       <Button variant='link'>
