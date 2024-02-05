@@ -27,7 +27,7 @@ export async function POST(req: Request) {
 
     // 刷新token
     const refreshToken = await axios.get(
-      'https://graph.instagram.com/refresh_access_token?grant_type=ig_refresh_token&access_token=IGQWROU2JRQXZARQTNoSEVyak1BeHZAxY25mUlk0WUlJRkkwSndzV0xRal9LNUV3Um1UQ2lnSmlmSTRvSDdJTFFxN2pGMF9ldHNBR1J3aFRMeVUzSHdXcmFQeHFabkIzZAXlQeVhreHJuUEROdwZDZD',
+      `https://graph.instagram.com/refresh_access_token?grant_type=ig_refresh_token&access_token=${process.env.NEXT_PUBLIC_IG_TOKEN}`,
     );
 
     // 獲得新token
