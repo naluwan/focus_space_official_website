@@ -131,7 +131,7 @@ const IGPost = ({
             </Button>
           </div>
           <div className='h-auto whitespace-pre-line'>
-            <p className='md:line-clamp-3'>{caption}</p>
+            <p className='md:truncate'>{caption}</p>
             <div className='flex justify-end pt-2'>
               <Dialog>
                 <DialogTrigger asChild className='hidden md:block'>
