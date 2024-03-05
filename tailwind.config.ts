@@ -102,6 +102,13 @@ module.exports = {
         'accordion-up': 'accordion-up 0.2s ease-out',
       },
     },
+    keyframes: {
+      shimmer: {
+        '100%': {
+          transform: 'translateX(100%)',
+        },
+      },
+    },
   },
   plugins: [require('tailwindcss-animate')],
 };
