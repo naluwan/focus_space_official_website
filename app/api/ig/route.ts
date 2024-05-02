@@ -11,7 +11,12 @@ export interface PostType {
   thumbnail_url?: string;
   children?: { data: { id: string; media_type: 'IMAGE' | 'VIDEO'; media_url: string }[] };
   carouselAlbum?: {
-    data: { id: string; media_type: 'IMAGE' | 'VIDEO'; media_url: string }[];
+    data: {
+      id: string;
+      media_type: 'IMAGE' | 'VIDEO';
+      media_url: string;
+      thumbnail_url: string;
+    }[];
   };
   postTime: number;
   isTop: boolean;

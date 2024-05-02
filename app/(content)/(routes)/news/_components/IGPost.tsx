@@ -24,7 +24,12 @@ interface IGPostProps {
   media_type: 'IMAGE' | 'VIDEO' | 'CAROUSEL_ALBUM';
   thumbnail_url?: string;
   carouselAlbum?: {
-    data: { id: string; media_type: 'IMAGE' | 'VIDEO'; media_url: string }[];
+    data: {
+      id: string;
+      media_type: 'IMAGE' | 'VIDEO';
+      media_url: string;
+      thumbnail_url: string;
+    }[];
   };
   isTop: boolean;
 }
@@ -78,8 +83,9 @@ const IGPost = ({
             {media_type === 'VIDEO' && (
               <VideoPlayer
                 key={`mobile-${id}`}
+                id={`mobile-${id}`}
                 options={{
-                  sources: [{ src: media_url }],
+                  sources: [{ src: media_url, type: 'video/mp4' }],
                   autoplay: false,
                   poster: thumbnail_url,
                 }}
@@ -106,9 +112,16 @@ const IGPost = ({
                       <CarouselItem key={item.id}>
                         <VideoPlayer
                           key={`mobile-album-${item.id}`}
+                          id={`mobile-album-${item.id}`}
                           options={{
-                            sources: [{ src: item.media_url }],
-                            autoplay: true,
+                            sources: [
+                              {
+                                src: item.media_url,
+                                type: 'video/mp4',
+                              },
+                            ],
+                            poster: item.thumbnail_url,
+                            autoplay: false,
                           }}
                         />
                       </CarouselItem>
@@ -161,7 +174,12 @@ const IGPost = ({
                     {media_type === 'VIDEO' && (
                       <VideoPlayer
                         key={`web-${id}`}
-                        options={{ sources: [{ src: media_url }], autoplay: true }}
+                        id={`web-${id}`}
+                        options={{
+                          sources: [{ src: media_url, type: 'video/mp4' }],
+                          poster: thumbnail_url,
+                          autoplay: true,
+                        }}
                       />
                     )}
 
@@ -185,9 +203,11 @@ const IGPost = ({
                               <CarouselItem key={item.id}>
                                 <VideoPlayer
                                   key={`web-album-${item.id}`}
+                                  id={`web-album-${item.id}`}
                                   options={{
-                                    sources: [{ src: item.media_url }],
-                                    autoplay: true,
+                                    sources: [{ src: item.media_url, type: 'video/mp4' }],
+                                    poster: item.thumbnail_url,
+                                    autoplay: false,
                                   }}
                                 />
                               </CarouselItem>
