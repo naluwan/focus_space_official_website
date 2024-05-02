@@ -1,6 +1,7 @@
 import React from 'react';
 import videojs from 'video.js';
 import 'video.js/dist/video-js.css';
+import './index.css';
 
 interface IVideoPlayerProps {
   options: videojs.PlayerOptions;
@@ -46,7 +47,7 @@ const VideoPlayer: React.FC<IVideoPlayerProps> = ({ options, id }) => {
   }, [videoId]);
 
   return (
-    <div>
+    <div className='h-full'>
       <video ref={videoNode} className='video-js' playsInline>
         <track kind='captions' />
       </video>
