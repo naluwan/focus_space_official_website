@@ -9,7 +9,14 @@ export interface PostType {
   permalink: string;
   media_type: 'IMAGE' | 'VIDEO' | 'CAROUSEL_ALBUM';
   thumbnail_url?: string;
-  children?: { data: { id: string; media_type: 'IMAGE' | 'VIDEO'; media_url: string }[] };
+  children?: {
+    data: {
+      id: string;
+      media_type: 'IMAGE' | 'VIDEO';
+      media_url: string;
+      thumbnail_url: string;
+    }[];
+  };
   carouselAlbum?: {
     data: {
       id: string;
