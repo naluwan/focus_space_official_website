@@ -37,22 +37,12 @@ export async function POST(req: Request) {
       return new NextResponse('驗證錯誤', { status: 401 });
     }
 
-    // 刷新token
-    const refreshToken = await axios.get(
-      `https://graph.instagram.com/refresh_access_token?grant_type=ig_refresh_token&access_token=${process.env.NEXT_PUBLIC_IG_TOKEN}`,
-    );
-
-    // 獲得新token
-    const {
-      data: { access_token },
-    } = refreshToken;
-
     // 獲取ig 文章
     const data = await axios.get(
       'https://graph.instagram.com/me/media?fields=id,caption,media_url,timestamp,permalink,media_type,thumbnail_url,children{media_url,thumbnail_url,media_type}&limit=100',
       {
         headers: {
-          Authorization: `Bearer ${access_token}`,
+          Authorization: `Bearer ${process.env.NEXT_PUBLIC_IG_TOKEN}`,
         },
       },
     );
