@@ -53,48 +53,89 @@ const IGPost = ({
           </div>
         )}
         <CardHeader className='md:max-h-[355px] lg:max-h-[315px] xl:max-h-[450px]'>
-          {/* 電腦版post預覽圖 */}
+          {/* 電腦版post預覽圖 - 只顯示一張 */}
           <div className='hidden overflow-hidden rounded-md md:block md:h-[400px]'>
             <Image
               src={
-                media_type === 'IMAGE' 
-                  ? media_url
-                  : media_type === 'CAROUSEL_ALBUM' && carouselAlbum?.data?.[0]
-                  ? carouselAlbum.data[0].media_type === 'VIDEO' 
-                    ? carouselAlbum.data[0].thumbnail_url 
-                    : carouselAlbum.data[0].media_url
-                  : media_type === 'VIDEO'
+                media_type === 'VIDEO'
                   ? (thumbnail_url as string)
-                  : media_url
+                  : media_url  // IMAGE 和 CAROUSEL_ALBUM 都使用 media_url 作為預覽圖
               }
               alt='post image'
               width={400}
               height={300}
-              className={cn('w-full object-cover', media_type === 'VIDEO' && 'h-full')}
+              className={cn('w-full object-cover h-full')}
               priority={isTop}
               loading={isTop ? 'eager' : 'lazy'}
             />
           </div>
-          {/* 手機版post預覽圖 - 只顯示單張預覽圖 */}
+          {/* 手機版圖片,影片或輪播圖 */}
           <div className='block overflow-hidden rounded-md md:hidden md:h-[300px]'>
-            <Image
-              src={
-                media_type === 'IMAGE' 
-                  ? media_url
-                  : media_type === 'CAROUSEL_ALBUM' && carouselAlbum?.data?.[0]
-                  ? carouselAlbum.data[0].media_type === 'VIDEO' 
-                    ? carouselAlbum.data[0].thumbnail_url 
-                    : carouselAlbum.data[0].media_url
-                  : media_type === 'VIDEO'
-                  ? (thumbnail_url as string)
-                  : media_url
-              }
-              alt='post image'
-              width={400}
-              height={300}
-              className='w-full object-cover md:h-[300px]'
-              priority={false}
-            />
+            {/* ig圖片 */}
+            {media_type === 'IMAGE' && (
+              <Image
+                src={media_url}
+                alt='post image'
+                width={400}
+                height={300}
+                className='w-full object-cover md:h-[300px]'
+                priority={false}
+              />
+            )}
+
+            {/* ig影片 */}
+            {media_type === 'VIDEO' && (
+              <VideoPlayer
+                key={`mobile-${id}`}
+                id={`mobile-${id}`}
+                options={{
+                  sources: [{ src: media_url, type: 'video/mp4' }],
+                  autoplay: false,
+                  poster: thumbnail_url,
+                }}
+              />
+            )}
+
+            {/* ig多張圖片或影片輪播 */}
+            {media_type === 'CAROUSEL_ALBUM' && (
+              <Carousel className='w-full'>
+                <CarouselContent className=''>
+                  {carouselAlbum?.data.map((item) => {
+                    return item.media_type === 'IMAGE' ? (
+                      <CarouselItem key={item.id}>
+                        <Image
+                          src={item.media_url}
+                          alt='post image'
+                          width={400}
+                          height={300}
+                          className='w-full object-cover md:h-[300px]'
+                          priority
+                        />
+                      </CarouselItem>
+                    ) : (
+                      <CarouselItem key={item.id}>
+                        <VideoPlayer
+                          key={`mobile-album-${item.id}`}
+                          id={`mobile-album-${item.id}`}
+                          options={{
+                            sources: [
+                              {
+                                src: item.media_url,
+                                type: 'video/mp4',
+                              },
+                            ],
+                            poster: item.thumbnail_url,
+                            autoplay: false,
+                          }}
+                        />
+                      </CarouselItem>
+                    );
+                  })}
+                </CarouselContent>
+                <CarouselPrevious />
+                <CarouselNext />
+              </Carousel>
+            )}
           </div>
         </CardHeader>
         <CardContent>
