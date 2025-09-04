@@ -75,73 +75,26 @@ const IGPost = ({
               loading={isTop ? 'eager' : 'lazy'}
             />
           </div>
-          {/* 手機版圖片,影片或輪播圖 */}
+          {/* 手機版post預覽圖 - 只顯示單張預覽圖 */}
           <div className='block overflow-hidden rounded-md md:hidden md:h-[300px]'>
-            {/* ig圖片 */}
-            {media_type === 'IMAGE' && (
-              <Image
-                src={media_url}
-                alt='post image'
-                width={400}
-                height={300}
-                className='w-full object-cover md:h-[300px]'
-                priority={false}
-              />
-            )}
-
-            {/* ig影片 */}
-            {media_type === 'VIDEO' && (
-              <VideoPlayer
-                key={`mobile-${id}`}
-                id={`mobile-${id}`}
-                options={{
-                  sources: [{ src: media_url, type: 'video/mp4' }],
-                  autoplay: false,
-                  poster: thumbnail_url,
-                }}
-              />
-            )}
-
-            {/* ig多張圖片或影片輪播 */}
-            {media_type === 'CAROUSEL_ALBUM' && (
-              <Carousel className='w-full'>
-                <CarouselContent className=''>
-                  {carouselAlbum?.data.map((item) => {
-                    return item.media_type === 'IMAGE' ? (
-                      <CarouselItem key={item.id}>
-                        <Image
-                          src={item.media_url}
-                          alt='post image'
-                          width={400}
-                          height={300}
-                          className='w-full object-cover md:h-[300px]'
-                          priority
-                        />
-                      </CarouselItem>
-                    ) : (
-                      <CarouselItem key={item.id}>
-                        <VideoPlayer
-                          key={`mobile-album-${item.id}`}
-                          id={`mobile-album-${item.id}`}
-                          options={{
-                            sources: [
-                              {
-                                src: item.media_url,
-                                type: 'video/mp4',
-                              },
-                            ],
-                            poster: item.thumbnail_url,
-                            autoplay: false,
-                          }}
-                        />
-                      </CarouselItem>
-                    );
-                  })}
-                </CarouselContent>
-                <CarouselPrevious />
-                <CarouselNext />
-              </Carousel>
-            )}
+            <Image
+              src={
+                media_type === 'IMAGE' 
+                  ? media_url
+                  : media_type === 'CAROUSEL_ALBUM' && carouselAlbum?.data?.[0]
+                  ? carouselAlbum.data[0].media_type === 'VIDEO' 
+                    ? carouselAlbum.data[0].thumbnail_url 
+                    : carouselAlbum.data[0].media_url
+                  : media_type === 'VIDEO'
+                  ? (thumbnail_url as string)
+                  : media_url
+              }
+              alt='post image'
+              width={400}
+              height={300}
+              className='w-full object-cover md:h-[300px]'
+              priority={false}
+            />
           </div>
         </CardHeader>
         <CardContent>
