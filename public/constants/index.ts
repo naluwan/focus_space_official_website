@@ -17,10 +17,12 @@ import coach16 from '@/public/coach/16.jpg';
 import coach17 from '@/public/coach/17.jpg';
 
 export const NAV_LINKS = [
+  { href: '/', key: 'home', label: '首頁' },
   { href: '/news', key: 'news', label: '最新消息' },
   { href: '/about', key: 'about', label: '關於我們' },
   { href: '/class', key: 'class', label: '專心練課程' },
   { href: '/coach', key: 'coach', label: '教練陣容' },
+  { href: '/testimonials', key: 'testimonials', label: '會員見證' },
 ];
 
 export const COACH_DATA = [

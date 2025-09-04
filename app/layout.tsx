@@ -4,7 +4,8 @@ import './globals.css';
 import type { Metadata } from 'next';
 // import { Inter } from 'next/font/google';
 import Footer from '@/components/Footer';
-import YoutubeBackground from '@/components/YoutubeBackground';
+import { Toaster } from 'react-hot-toast';
+// import YoutubeBackground from '@/components/YoutubeBackground'; // 保留程式碼作為參考
 
 // const inter = Inter({ subsets: ['latin'] });
 
@@ -53,7 +54,25 @@ const RootLayout = ({ children }: { children: React.ReactNode }) => {
         <div className='w-full bg-white'>
           <Footer />
         </div>
-        <YoutubeBackground />
+        <Toaster
+          position="top-center"
+          reverseOrder={false}
+          gutter={8}
+          containerClassName=""
+          containerStyle={{}}
+          toastOptions={{
+            className: '',
+            duration: 4000,
+            style: {
+              background: '#363636',
+              color: '#fff',
+            },
+            success: {
+              duration: 3000,
+            },
+          }}
+        />
+        {/* <YoutubeBackground /> 保留程式碼作為參考 */}
       </body>
     </html>
   );

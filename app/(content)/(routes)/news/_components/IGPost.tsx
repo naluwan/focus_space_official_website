@@ -1,4 +1,3 @@
-import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader } from '@/components/ui/card';
 import Image from 'next/image';
 import React from 'react';
@@ -47,8 +46,12 @@ const IGPost = ({
 }: IGPostProps) => {
   return (
     <>
-      <Card className='relative transition-all duration-500 hover:scale-105 md:max-h-[600px]'>
-        {isTop && <ArrowUpRightFromCircle className='absolute right-1 top-1' />}
+      <Card className='group relative overflow-hidden border-gray-800 bg-gray-900/50 backdrop-blur-sm transition-all duration-500 hover:scale-105 hover:border-red-600/50 hover:shadow-2xl hover:shadow-red-600/20 md:max-h-[600px]'>
+        {isTop && (
+          <div className='absolute right-2 top-2 z-10 rounded-full bg-gradient-to-r from-red-600 to-yellow-500 p-2'>
+            <ArrowUpRightFromCircle className='h-5 w-5 text-white' />
+          </div>
+        )}
         <CardHeader className='md:max-h-[355px] lg:max-h-[315px] xl:max-h-[450px]'>
           {/* 電腦版post預覽圖 */}
           <div className='hidden overflow-hidden rounded-md md:block md:h-[400px]'>
@@ -62,7 +65,8 @@ const IGPost = ({
               width={400}
               height={300}
               className={cn('w-full object-cover', media_type === 'VIDEO' && 'h-full')}
-              priority
+              priority={isTop}
+              loading={isTop ? 'eager' : 'lazy'}
             />
           </div>
           {/* 手機版圖片,影片或輪播圖 */}
@@ -75,7 +79,7 @@ const IGPost = ({
                 width={400}
                 height={300}
                 className='w-full object-cover md:h-[300px]'
-                priority
+                priority={false}
               />
             )}
 
@@ -135,25 +139,34 @@ const IGPost = ({
           </div>
         </CardHeader>
         <CardContent>
-          <div className='flex w-1/2 items-center justify-between'>
-            <p>{new Date(timestamp).toLocaleDateString()}</p>
-            <Button variant='link'>
-              <a href={permalink} target='_blank' rel='noreferrer'>
-                連結Instagram貼文
-              </a>
-            </Button>
+          <div className='flex items-center justify-between'>
+            <p className='text-sm text-gray-400'>{new Date(timestamp).toLocaleDateString()}</p>
+            <a
+              href={permalink}
+              target='_blank'
+              rel='noreferrer'
+              className='group inline-flex items-center gap-1 text-sm font-medium text-red-600 transition-all duration-300 hover:text-yellow-500'
+            >
+              <span>查看Instagram</span>
+              <svg className='h-4 w-4 transition-transform group-hover:translate-x-1' fill='none' stroke='currentColor' viewBox='0 0 24 24'>
+                <path strokeLinecap='round' strokeLinejoin='round' strokeWidth={2} d='M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14' />
+              </svg>
+            </a>
           </div>
           <div className='h-auto whitespace-pre-line'>
-            <p className='md:truncate'>{caption}</p>
+            <p className='text-gray-300 md:truncate'>{caption}</p>
             <div className='flex justify-end pt-2'>
               <Dialog>
                 <DialogTrigger asChild className='hidden md:block'>
-                  <Button>查看更多</Button>
+                  <button className='group relative overflow-hidden rounded-full bg-gradient-to-r from-red-600 to-yellow-500 p-[2px] transition-all duration-300 hover:scale-110'>
+                    <span className='flex items-center gap-2 rounded-full bg-gray-900 px-4 py-2 text-sm font-medium text-white transition-all duration-300 group-hover:bg-gray-900/80'>
+                      查看更多
+                    </span>
+                  </button>
                 </DialogTrigger>
                 <DialogContent
                   className={cn(
-                    'flex max-h-[750px] max-w-[90%] justify-around data-[state=open]:duration-500 max-md:hidden',
-                    media_type === 'VIDEO' ? 'items-center' : 'items-start ',
+                    'flex max-h-[750px] max-w-[90%] justify-around items-start data-[state=open]:duration-500 max-md:hidden bg-gray-900',
                   )}
                 >
                   {/* post圖片,影片或輪播圖 */}
@@ -220,16 +233,22 @@ const IGPost = ({
                     )}
                   </div>
                   {/* post文字 */}
-                  <div className='max-h-[750px] w-[65%] overflow-y-auto py-8'>
-                    <div className='flex w-1/2 items-center justify-between'>
-                      <p>{new Date(timestamp).toLocaleDateString()}</p>
-                      <Button variant='link'>
-                        <a href={permalink} target='_blank' rel='noreferrer'>
-                          連結Instagram貼文
-                        </a>
-                      </Button>
+                  <div className='max-h-[750px] w-[65%] overflow-y-auto bg-gray-900 p-8'>
+                    <div className='mb-4 flex items-center justify-between border-b border-gray-800 pb-4'>
+                      <p className='text-sm text-gray-400'>{new Date(timestamp).toLocaleDateString()}</p>
+                      <a
+                        href={permalink}
+                        target='_blank'
+                        rel='noreferrer'
+                        className='group inline-flex items-center gap-1 text-sm font-medium text-red-600 transition-all duration-300 hover:text-yellow-500'
+                      >
+                        <span>在Instagram查看</span>
+                        <svg className='h-4 w-4 transition-transform group-hover:translate-x-1' fill='none' stroke='currentColor' viewBox='0 0 24 24'>
+                          <path strokeLinecap='round' strokeLinejoin='round' strokeWidth={2} d='M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14' />
+                        </svg>
+                      </a>
                     </div>
-                    <p className='whitespace-pre-line'>{caption}</p>
+                    <p className='whitespace-pre-line text-gray-300'>{caption}</p>
                   </div>
                 </DialogContent>
               </Dialog>

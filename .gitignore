@@ -28,9 +28,32 @@ yarn-error.log*
 .env*.local
 .env
 
+# token cache
+.token-cache.json
+
 # vercel
 .vercel
 
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# documentation and development files
+docs/
+TODOLIST.md
+WORK_PROGRESS_*.md
+TRIPLE_N_DESIGN_METHODOLOGY.md
+build_*.txt
+final_build.txt
+專案*.md
+
+# testing
+__tests__/
+*.test.*
+*.spec.*
+jest.config.*
+jest.setup.*
+
+# development artifacts
+Profile
+cookies.txt

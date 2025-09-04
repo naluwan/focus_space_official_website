@@ -1,3 +1,13 @@
+/**
+ * YouTube 背景組件 - 保留作為參考
+ * 原作者自製，具有參考價值
+ * 功能：全螢幕 YouTube 影片背景播放
+ * 
+ * 使用方式：
+ * 1. 在 layout.tsx 中導入並使用
+ * 2. 確保 tailwind.config.ts 中有 video-width 和 video-height 設定
+ * 3. 確保 globals.css 中有對應的 CSS 變數
+ */
 const YoutubeBackground = () => {
   return (
     <div className='relative h-full'>
