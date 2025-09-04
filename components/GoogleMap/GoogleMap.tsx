@@ -29,7 +29,6 @@ const GoogleMap: React.FC<GoogleMapProps> = ({
         const apiKey = process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY;
         
         if (!apiKey) {
-          console.error('Google Maps API Key not found');
           setMapError(true);
           return;
         }
@@ -85,7 +84,6 @@ const GoogleMap: React.FC<GoogleMapProps> = ({
               // 如果還未載入完成，再等一下
               setTimeout(checkGoogleMaps, 100);
             } else {
-              console.error('Google Maps failed to load after timeout');
               setMapError(true);
             }
           };
@@ -93,21 +91,18 @@ const GoogleMap: React.FC<GoogleMapProps> = ({
         };
 
         script.onerror = () => {
-          console.error('Failed to load Google Maps');
           setMapError(true);
         };
 
         document.head.appendChild(script);
 
       } catch (error) {
-        console.error('Error loading Google Maps:', error);
         setMapError(true);
       }
     };
 
     const initializeMap = () => {
       if (!mapRef.current || !window.google || !window.google.maps || !window.google.maps.Map) {
-        console.error('Google Maps API not fully loaded');
         setMapError(true);
         return;
       }
@@ -186,7 +181,6 @@ const GoogleMap: React.FC<GoogleMapProps> = ({
         setMapLoaded(true);
 
       } catch (error) {
-        console.error('Error initializing map:', error);
         setMapError(true);
       }
     };

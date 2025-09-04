@@ -67,7 +67,6 @@ const TimeSlotSelection: React.FC<TimeSlotSelectionProps> = ({
         setLoading(false);
       }, 500);
     } catch (error) {
-      console.error('Failed to check slots:', error);
       setLoading(false);
     }
   }, []);

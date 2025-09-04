@@ -34,7 +34,6 @@ const ClassPage = () => {
           );
         }
       } catch (error) {
-        console.error('Failed to fetch courses:', error);
         setPersonalCourses([]);
         setGroupCourses([]);
       } finally {

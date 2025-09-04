@@ -53,7 +53,6 @@ const Testimonials = () => {
           setTestimonials(data.data || []);
         }
       } catch (error) {
-        console.error('Failed to fetch testimonials:', error);
         setTestimonials([]);
       } finally {
         setLoading(false);

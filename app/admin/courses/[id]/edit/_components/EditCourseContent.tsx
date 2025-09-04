@@ -116,7 +116,7 @@ const EditCourseContent = ({ session, course }: EditCourseContentProps) => {
 
   const { startUpload, isUploading } = useUploadThing('courseImage', {
     onClientUploadComplete: (res) => {
-      console.log('Upload completed:', res);
+      // Upload completed successfully
     },
     onUploadError: (error) => {
       console.error('Upload error:', error);

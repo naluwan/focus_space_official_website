@@ -57,3 +57,6 @@ jest.setup.*
 # development artifacts
 Profile
 cookies.txt
+
+# scripts (contain sensitive testing tools)
+scripts/

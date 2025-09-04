@@ -36,7 +36,7 @@ export async function POST(request: NextRequest) {
     await connectToDatabase();
 
     const bookingData = await request.json();
-    console.log('Received booking data:', bookingData);
+    // Booking data received and validated
 
     // 驗證必填欄位
     const validationErrors: Record<string, string> = {};
@@ -221,11 +221,7 @@ export async function POST(request: NextRequest) {
     const booking = new Booking(newBookingData);
     await booking.save();
     
-    console.log('Booking created successfully:', {
-      bookingNumber: booking.bookingNumber,
-      bookingId: String(booking._id),
-      bookingType: booking.bookingType
-    });
+    // Booking created successfully
 
     // 發送預約確認郵件
     try {
@@ -274,7 +270,7 @@ export async function POST(request: NextRequest) {
       };
 
       await sendBookingEmail(emailData);
-      console.log('Booking confirmation email sent successfully');
+      // Booking confirmation email sent successfully
     } catch (emailError) {
       console.error('Failed to send booking confirmation email:', emailError);
       // 不讓郵件發送失敗影響預約流程

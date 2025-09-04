@@ -66,7 +66,7 @@ export async function GET(request: NextRequest) {
 
     // 如果沒有分頁參數，返回所有預約
     if (!searchParams.has('page')) {
-      console.log('Sample booking ID from list:', bookings[0]?._id, typeof bookings[0]?._id);
+      // Returning all bookings without pagination
       return NextResponse.json(bookings);
     }
     

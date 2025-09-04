@@ -54,7 +54,6 @@ const CourseCalendar = ({ category = 'all', className = '' }: CourseCalendarProp
           setCourses(filteredCourses);
         }
       } catch (error) {
-        console.error('Failed to fetch courses:', error);
         setCourses([]);
       } finally {
         setLoading(false);

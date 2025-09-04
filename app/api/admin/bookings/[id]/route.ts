@@ -10,7 +10,7 @@ export async function GET(
   { params }: { params: { id: string } }
 ) {
   try {
-    console.log('GET booking API called with ID:', params.id);
+    // GET booking API called
     
     const session = await getServerSession(authOptions);
     
@@ -20,11 +20,11 @@ export async function GET(
     }
 
     await connectToDatabase();
-    console.log('Database connected, searching for booking...');
+    // Database connected, searching for booking
 
     // 驗證 ObjectId 格式
     if (!mongoose.Types.ObjectId.isValid(params.id)) {
-      console.log('Invalid ObjectId format:', params.id);
+      // Invalid ObjectId format
       return NextResponse.json({ error: '無效的預約ID格式' }, { status: 400 });
     }
 
@@ -32,10 +32,10 @@ export async function GET(
       .populate('courseId', 'title weekdays timeSlots category startDate endDate')
       .lean();
     
-    console.log('Booking search result:', booking ? 'Found' : 'Not found');
+    // Booking search completed
     
     if (!booking) {
-      console.log('Booking not found with ID:', params.id);
+      // Booking not found
       return NextResponse.json({ error: '預約不存在' }, { status: 404 });
     }
 

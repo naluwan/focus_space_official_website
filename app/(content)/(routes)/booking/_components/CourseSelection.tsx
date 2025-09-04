@@ -78,7 +78,7 @@ const CourseSelection: React.FC<CourseSelectionProps> = ({
         setCourses(availableCourses);
       }
     } catch (error) {
-      console.error('Failed to fetch courses:', error);
+      // 靜默處理錯誤
     } finally {
       setLoading(false);
     }

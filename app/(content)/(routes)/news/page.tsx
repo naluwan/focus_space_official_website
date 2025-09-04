@@ -37,20 +37,18 @@ const NewsPage = () => {
         setPostsData(data);
         setError(null);
         
-        // 如果是過時的快取資料，顯示警告（可選）
+        // 如果是過時的快取資料（靜默處理）
         if (res.data.stale) {
-          console.warn('Displaying cached Instagram posts due to API issues');
+          // 靜默處理，不顯示警告
         }
       } catch (err) {
         if (axios.isCancel(err)) {
-          console.log('Request cancelled');
+          // Request cancelled - 靜默處理
         } else {
-          console.error('Error fetching Instagram posts:', err);
           
           // 檢查是否為 token 錯誤
           if (axios.isAxiosError(err) && err.response?.headers?.['x-error-type'] === 'instagram-api-error') {
             setError('Instagram API 連接問題，請稍後再試');
-            console.error('Instagram token error - admin action required');
           } else {
             setError('載入 Instagram 貼文時發生錯誤');
           }

@@ -49,7 +49,6 @@ const CoursePreview = () => {
           setCourses(data.data || []);
         }
       } catch (error) {
-        console.error('Failed to fetch courses:', error);
         setCourses([]);
       } finally {
         setLoading(false);

@@ -170,7 +170,6 @@ const BookingForm: React.FC<BookingFormProps> = ({
       if (!response.ok) {
         // 處理 API 回傳的驗證錯誤
         if (result.errors) {
-          console.error('Validation errors:', result.errors);
           setErrors(result.errors);
           toast.error('預約資料有誤，請檢查並重新填寫');
           return;
@@ -197,7 +196,6 @@ const BookingForm: React.FC<BookingFormProps> = ({
       }, 3000);
       
     } catch (error) {
-      console.error('預約錯誤:', error);
       toast.error(error instanceof Error ? error.message : '預約失敗，請稍後再試');
     } finally {
       setIsLoading(false);

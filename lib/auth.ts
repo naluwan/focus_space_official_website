@@ -44,7 +44,6 @@ export const authOptions: NextAuthOptions = {
             role: admin.role,
           };
         } catch (error) {
-          console.error('Authentication error:', error);
           throw new Error('登入失敗，請稍後再試');
         }
       }
