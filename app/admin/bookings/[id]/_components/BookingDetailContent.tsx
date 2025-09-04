@@ -199,13 +199,13 @@ const BookingDetailContent = ({ session, bookingId }: BookingDetailContentProps)
   const fetchBooking = useCallback(async () => {
     try {
       setLoading(true);
-      console.log('Fetching booking with ID:', bookingId);
+      // Fetching booking details
       const response = await fetch(`/api/admin/bookings/${bookingId}`);
-      console.log('Response status:', response.status);
+      // Response received
       
       if (response.ok) {
         const data = await response.json();
-        console.log('Booking data received:', data);
+        // Booking data received
         setBooking(data.booking);
       } else {
         const errorData = await response.json();

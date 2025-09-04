@@ -4,6 +4,15 @@ const nextConfig = {
   images: {
     unoptimized: true,
   },
+  // 改善 CSS 預載行為
+  experimental: {
+    optimisticClientCache: false,
+  },
+  // 減少不必要的預載資源警告
+  onDemandEntries: {
+    maxInactiveAge: 25 * 1000,
+    pagesBufferLength: 2,
+  },
   webpack: (config, { isServer }) => {
     if (!isServer) {
       // 在客戶端環境中忽略 Node.js 專用模組

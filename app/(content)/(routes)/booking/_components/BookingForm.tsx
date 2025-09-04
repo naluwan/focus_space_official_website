@@ -115,7 +115,7 @@ const BookingForm: React.FC<BookingFormProps> = ({
     
     setErrors(newErrors);
     const isValid = Object.keys(newErrors).length === 0;
-    console.log('Validation result:', { isValid, errors: newErrors, currentStep, bookingType: bookingData.bookingType });
+    // Validation completed
     return isValid;
   };
 
@@ -139,12 +139,12 @@ const BookingForm: React.FC<BookingFormProps> = ({
   // 進入確認頁面（不發送API請求）
   const handleSubmit = async () => {
     if (!validateStep()) {
-      console.log('Validation failed', errors);
+      // Validation failed
       toast.error('請填寫所有必填欄位');
       return;
     }
     
-    console.log('Moving to confirmation step with booking data:', bookingData);
+    // Moving to confirmation step
     // 直接進入確認頁面，不發送API請求
     const maxSteps = getMaxSteps();
     setCurrentStep(maxSteps);
@@ -152,7 +152,7 @@ const BookingForm: React.FC<BookingFormProps> = ({
 
   // 完成預約（發送API請求並寫入資料庫）
   const handleConfirm = async () => {
-    console.log('Confirming booking, sending to API:', bookingData);
+    // Confirming booking
     setIsLoading(true);
     
     try {
@@ -165,7 +165,7 @@ const BookingForm: React.FC<BookingFormProps> = ({
       });
       
       const result = await response.json();
-      console.log('API response:', result);
+      // API response received
       
       if (!response.ok) {
         // 處理 API 回傳的驗證錯誤
@@ -185,7 +185,7 @@ const BookingForm: React.FC<BookingFormProps> = ({
         bookingId: result.data.bookingId
       });
       
-      console.log('Booking successful with booking number:', result.data.bookingNumber);
+      // Booking successful
       toast.success('預約已提交！我們會盡快與您聯繫確認');
       
       // 設置預約完成狀態並在短暫延遲後導向首頁

@@ -79,7 +79,7 @@ const GoogleMap: React.FC<GoogleMapProps> = ({
           const checkGoogleMaps = () => {
             attempts++;
             if (window.google && window.google.maps && window.google.maps.Map) {
-              console.log('Google Maps loaded successfully');
+              // Google Maps loaded successfully
               initializeMap();
             } else if (attempts < maxAttempts) {
               // 如果還未載入完成，再等一下
