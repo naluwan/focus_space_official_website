@@ -21,7 +21,7 @@ export interface ITestimonial extends Document {
 }
 
 // 見證 Schema
-const TestimonialSchema = new mongoose.Schema<ITestimonial>(
+const TestimonialSchema = new mongoose.Schema(
   {
     memberName: {
       type: String,
