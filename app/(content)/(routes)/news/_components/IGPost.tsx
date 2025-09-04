@@ -57,9 +57,15 @@ const IGPost = ({
           <div className='hidden overflow-hidden rounded-md md:block md:h-[400px]'>
             <Image
               src={
-                media_type === 'IMAGE' || media_type === 'CAROUSEL_ALBUM'
+                media_type === 'IMAGE' 
                   ? media_url
-                  : (thumbnail_url as string)
+                  : media_type === 'CAROUSEL_ALBUM' && carouselAlbum?.data?.[0]
+                  ? carouselAlbum.data[0].media_type === 'VIDEO' 
+                    ? carouselAlbum.data[0].thumbnail_url 
+                    : carouselAlbum.data[0].media_url
+                  : media_type === 'VIDEO'
+                  ? (thumbnail_url as string)
+                  : media_url
               }
               alt='post image'
               width={400}
