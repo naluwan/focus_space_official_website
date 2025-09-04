@@ -21,7 +21,7 @@ export const ourFileRouter = {
       // Whatever is returned here is accessible in onUploadComplete as `metadata`
       return { userId: session.user.id, userRole: session.user.role };
     })
-    .onUploadComplete(async ({ metadata, file }) => {
+    .onUploadComplete(async () => {
       // This code RUNS ON YOUR SERVER after upload
       // Upload completed successfully
       

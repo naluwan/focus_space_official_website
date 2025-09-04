@@ -84,11 +84,10 @@ const NewCourseContent = ({ session }: NewCourseContentProps) => {
   });
 
   const { startUpload, isUploading } = useUploadThing('courseImage', {
-    onClientUploadComplete: (res) => {
+    onClientUploadComplete: () => {
       // Upload completed successfully
     },
     onUploadError: (error) => {
-      console.error('Upload error:', error);
       setErrors(prev => ({ ...prev, image: `圖片上傳失敗: ${error.message}` }));
     },
   });
