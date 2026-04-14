@@ -113,8 +113,7 @@ export const sendBookingEmail = async (bookingData: BookingEmailData) => {
             <ul style="color: #276749; line-height: 1.6; padding-left: 20px; margin: 0;">
               <li>體驗時間約 60 分鐘，包含完整場館導覽</li>
               <li>專業設備介紹與使用說明</li>
-              <li>一對一教練諮詢與健身計劃建議</li>
-              <li>免費體驗，無任何隱藏費用</li>
+              <li>無任何隱藏費用</li>
               <li>可現場了解課程方案與會員優惠</li>
             </ul>
           </div>
@@ -174,9 +173,9 @@ export const sendBookingEmail = async (bookingData: BookingEmailData) => {
                       bookingData.courseWeekdays && bookingData.courseWeekdays.length > 0
                         ? `
                       <p style="margin: 8px 0;"><strong>上課日期：</strong>每${bookingData.courseWeekdays
-                        .map(day => day === 0 ? 7 : day) // 將星期日轉為7
+                        .map((day) => (day === 0 ? 7 : day)) // 將星期日轉為7
                         .sort((a, b) => a - b) // 排序
-                        .map(day => day === 7 ? 0 : day) // 轉回原來的0
+                        .map((day) => (day === 7 ? 0 : day)) // 轉回原來的0
                         .map((day: number) => {
                           const weekdays = [
                             '週日',
@@ -230,7 +229,9 @@ export const sendBookingEmail = async (bookingData: BookingEmailData) => {
                   <h5 style="margin: 15px 0 10px 0; color: #742a2a; font-size: 16px;">✨ 課程特色</h5>
                   <div style="line-height: 1.8; color: #4a5568;">
                     <ul style="padding-left: 20px; margin: 0;">
-                      ${bookingData.courseFeatures.map(feature => `<li>${feature}</li>`).join('')}
+                      ${bookingData.courseFeatures
+                        .map((feature) => `<li>${feature}</li>`)
+                        .join('')}
                     </ul>
                   </div>
                 `
@@ -403,9 +404,9 @@ export const sendBookingEmail = async (bookingData: BookingEmailData) => {
                       bookingData.courseWeekdays && bookingData.courseWeekdays.length > 0
                         ? `
                       <p style="margin: 5px 0;"><strong>上課日期：</strong>每${bookingData.courseWeekdays
-                        .map(day => day === 0 ? 7 : day) // 將星期日轉為7
+                        .map((day) => (day === 0 ? 7 : day)) // 將星期日轉為7
                         .sort((a, b) => a - b) // 排序
-                        .map(day => day === 7 ? 0 : day) // 轉回原來的0
+                        .map((day) => (day === 7 ? 0 : day)) // 轉回原來的0
                         .map((day: number) => {
                           const weekdays = [
                             '週日',
