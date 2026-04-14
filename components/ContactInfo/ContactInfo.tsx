@@ -253,9 +253,9 @@ const ContactInfo = () => {
 
               <h3 className='mb-4 text-2xl font-bold'>立即預約</h3>
               <p className='mb-6 text-xl opacity-90'>
-                免費體驗課程
+                課程體驗
                 <br />
-                專業諮詢服務
+                諮詢服務
               </p>
 
               <div className='mb-8 space-y-4'>
