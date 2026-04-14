@@ -230,7 +230,7 @@ const Coach3DShowcase = () => {
                 查看所有教練
               </button>
               <button className='border-2 border-brand-red-500 text-brand-red-600 px-8 py-4 rounded-xl font-semibold hover:bg-brand-red-500 hover:text-white transition-colors duration-300'>
-                預約體驗課程
+                預約教練課體驗
               </button>
             </div>
           </div>

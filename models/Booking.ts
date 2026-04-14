@@ -19,7 +19,8 @@ export enum BookingType {
 export interface IBooking extends Document {
   // 預約類型
   bookingType: BookingType;
-  
+  trialType?: '1v1' | '1v2';
+
   // 客戶資訊
   customerName: string;
   customerEmail: string;
@@ -84,6 +85,12 @@ const BookingSchema = new mongoose.Schema<IBooking>(
       enum: Object.values(BookingType),
       required: [true, '請選擇預約類型'],
       default: BookingType.TRIAL
+    },
+    trialType: {
+      type: String,
+      enum: ['1v1', '1v2'],
+      required: false,
+      default: undefined
     },
     
     // 客戶資訊

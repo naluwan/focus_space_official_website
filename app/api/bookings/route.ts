@@ -23,6 +23,7 @@ interface CourseBooking extends IBooking {
 // 定義體驗預約的完整類型
 interface TrialBooking extends IBooking {
   bookingType: BookingType.TRIAL;
+  trialType?: '1v1' | '1v2';
   customerGender?: 'male' | 'female' | 'other';
   customerAge?: number;
   hasExperience?: boolean;
@@ -135,7 +136,11 @@ export async function POST(request: NextRequest) {
     // 體驗預約專屬欄位
     if (bookingData.bookingType === 'trial') {
       const trialData: Record<string, string | number | boolean | undefined> = {};
-      
+
+      if (bookingData.trialType === '1v1' || bookingData.trialType === '1v2') {
+        trialData.trialType = bookingData.trialType;
+      }
+
       if (bookingData.customerGender && ['male', 'female', 'other'].includes(bookingData.customerGender)) {
         trialData.customerGender = bookingData.customerGender;
       }
@@ -259,6 +264,8 @@ export async function POST(request: NextRequest) {
         ...(booking.bookingType === 'trial' && (() => {
           const trialBooking = booking as TrialBooking;
           return {
+            trialType: trialBooking.trialType,
+            totalPrice: booking.totalPrice,
             customerGender: trialBooking.customerGender,
             customerAge: trialBooking.customerAge,
             hasExperience: trialBooking.hasExperience,

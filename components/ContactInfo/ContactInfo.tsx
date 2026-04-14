@@ -280,7 +280,7 @@ const ContactInfo = () => {
                 withIcon
                 onClick={() => router.push('/booking')}
               >
-                立即預約體驗
+                立即預約教練課體驗
               </MicroButton>
             </div>
           </div>

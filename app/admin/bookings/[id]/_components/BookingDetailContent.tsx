@@ -27,6 +27,7 @@ interface Booking {
   _id: string;
   bookingNumber: string;
   bookingType: 'trial' | 'course';
+  trialType?: '1v1' | '1v2';
   customerName: string;
   customerEmail: string;
   customerPhone: string;
@@ -475,7 +476,13 @@ const BookingDetailContent = ({ session, bookingId }: BookingDetailContentProps)
                           <BookOpen size={16} className='text-gray-400' />
                           <div>
                             <p className='text-sm text-gray-600'>預約類型</p>
-                            <p className='font-medium text-gray-900'>場館體驗</p>
+                            <p className='font-medium text-gray-900'>
+                              {booking.trialType === '1v2'
+                                ? '1對2教練課體驗'
+                                : booking.trialType === '1v1'
+                                ? '1對1教練課體驗'
+                                : '教練課體驗'}
+                            </p>
                           </div>
                         </div>
                         <div className='flex items-center space-x-3'>

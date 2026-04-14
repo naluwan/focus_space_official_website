@@ -48,7 +48,7 @@ const TrialBookingForm: React.FC<TrialBookingComponentProps> = ({
 
   return (
     <div>
-      <h2 className="text-2xl font-bold text-gray-900 mb-2">填寫體驗預約資料</h2>
+      <h2 className="text-2xl font-bold text-gray-900 mb-2">填寫教練課體驗資料</h2>
       <p className="text-gray-600 mb-8">請詳細填寫資料，幫助教練為您提供更好的服務</p>
       
       <div className="space-y-6">

@@ -406,7 +406,7 @@ const AnalyticsContent = ({ session }: AnalyticsContentProps) => {
                     </div>
                     <div className='space-y-3'>
                       <div className='flex justify-between items-center'>
-                        <span className='text-sm text-gray-600'>體驗預約</span>
+                        <span className='text-sm text-gray-600'>教練課體驗</span>
                         <span className='text-sm font-medium text-gray-900'>
                           {analyticsData.bookingTypeDistribution.trial}
                         </span>

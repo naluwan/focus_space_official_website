@@ -395,7 +395,7 @@ const CoursePreview = () => {
                     className='px-8 py-4 text-lg hover:text-white'
                   >
                     <ArrowRight className='h-5 w-5' />
-                    預約體驗課程
+                    預約教練課體驗
                   </MicroButton>
                 </div>
               </div>

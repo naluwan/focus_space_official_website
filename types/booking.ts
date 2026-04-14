@@ -21,6 +21,7 @@ export interface Course {
 
 export interface BookingData {
   bookingType?: 'trial' | 'course';
+  trialType?: '1v1' | '1v2';
   bookingNumber?: string;
   bookingId?: string;
   
@@ -60,6 +61,7 @@ export interface BookingData {
 // 前端表單狀態使用的資料格式（包含必需屬性）
 export interface BookingFormData {
   bookingType: 'trial' | 'course' | undefined;
+  trialType?: '1v1' | '1v2';
   bookingNumber?: string;
   bookingId?: string;
   

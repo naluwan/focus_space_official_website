@@ -413,7 +413,7 @@ const DashboardContent = ({ session }: DashboardContentProps) => {
                               {booking.customerName}
                             </div>
                             <div className='text-xs text-gray-500'>
-                              {booking.bookingNumber} • {booking.bookingType === 'trial' ? '體驗' : '課程'}
+                              {booking.bookingNumber} • {booking.bookingType === 'trial' ? '教練課體驗' : '課程'}
                             </div>
                           </div>
                           <div className={`px-2 py-1 rounded-full text-xs font-medium ${getStatusColor(booking.status)}`}>

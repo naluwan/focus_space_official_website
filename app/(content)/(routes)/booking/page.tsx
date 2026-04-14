@@ -10,6 +10,7 @@ const BookingPage: React.FC = () => {
   const [currentStep, setCurrentStep] = useState(1);
   const [bookingData, setBookingData] = useState<BookingFormData>({
     bookingType: undefined,
+    trialType: undefined,
     // 課程預約欄位
     courseId: '',
     courseName: '',
@@ -63,11 +64,11 @@ const BookingPage: React.FC = () => {
         {/* 頁面標題 */}
         <div className='text-center mb-10'>
           <h1 className='text_brand_gradient text-4xl md:text-6xl font-bold font-bebas_neue mb-4'>
-            {bookingData.bookingType === 'trial' ? '預約體驗' : 
+            {bookingData.bookingType === 'trial' ? '預約教練課體驗' :
              bookingData.bookingType === 'course' ? '預約課程' : '線上預約'}
           </h1>
           <p className='text-xl text-gray-900 font-medium'>
-            {bookingData.bookingType === 'trial' ? '簡單兩步驟，預約您的專屬場館體驗' :
+            {bookingData.bookingType === 'trial' ? '簡單兩步驟，預約您的首次教練課體驗' :
              bookingData.bookingType === 'course' ? '簡單四步驟，輕鬆預約您的專屬訓練時段' :
              '選擇您想要的預約類型，開始您的健身之旅'}
           </p>

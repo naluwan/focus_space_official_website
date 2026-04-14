@@ -148,7 +148,7 @@ const Hero = () => {
             className='min-w-[200px] px-8 py-4 text-lg'
           >
             <Calendar className='h-5 w-5' />
-            立即預約體驗
+            立即預約教練課體驗
           </MicroButton>
         </div>
       </div>

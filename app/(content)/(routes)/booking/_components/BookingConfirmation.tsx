@@ -49,7 +49,17 @@ const BookingConfirmation: React.FC<BookingConfirmationProps> = ({
   };
 
   const getBookingTypeName = () => {
-    return bookingData.bookingType === 'trial' ? '場館體驗' : '課程預約';
+    if (bookingData.bookingType !== 'trial') return '課程預約';
+    if (bookingData.trialType === '1v2') return '1對2教練課體驗';
+    return '1對1教練課體驗';
+  };
+
+  const getTrialPrice = () => {
+    return bookingData.trialType === '1v2' ? 1300 : 1000;
+  };
+
+  const getTrialOriginalPrice = () => {
+    return bookingData.trialType === '1v2' ? 2000 : 1800;
   };
 
   const getCategoryName = (category?: string) => {
@@ -100,7 +110,7 @@ const BookingConfirmation: React.FC<BookingConfirmationProps> = ({
           <div className="border border-gray-100 rounded-xl p-4">
             <p className="text-2xl font-bold text-brand-red-600">{getBookingTypeName()}</p>
             {bookingData.bookingType === 'trial' && (
-              <p className="text-gray-600 mt-1">首次體驗 Focus Space 專業服務</p>
+              <p className="text-gray-600 mt-1">首次體驗 Focus Space 專業教練課</p>
             )}
           </div>
         </div>
@@ -308,17 +318,27 @@ const BookingConfirmation: React.FC<BookingConfirmationProps> = ({
             <div className="flex items-center justify-between">
               <div>
                 <p className="text-gray-600 mb-1">總費用</p>
-                <p className="text-3xl font-bold text-gray-900">
-                  {bookingData.bookingType === 'trial' 
-                    ? '免費' 
-                    : `NT$ ${bookingData.totalPrice || 0}`
-                  }
-                </p>
+                <div className="flex items-baseline gap-3">
+                  {bookingData.bookingType === 'trial' && (
+                    <span className="text-lg text-gray-400 line-through">
+                      {`NT$ ${getTrialOriginalPrice().toLocaleString()}`}
+                    </span>
+                  )}
+                  <p className="text-3xl font-bold text-gray-900">
+                    {`NT$ ${
+                      bookingData.bookingType === 'trial'
+                        ? getTrialPrice().toLocaleString()
+                        : (bookingData.totalPrice || 0).toLocaleString()
+                    }`}
+                  </p>
+                </div>
               </div>
               {bookingData.bookingType === 'trial' && (
                 <div className="text-right">
                   <p className="text-gray-600 text-sm">首次體驗優惠</p>
-                  <p className="text-lg font-semibold text-gray-900">完全免費</p>
+                  <p className="text-lg font-semibold text-green-600">
+                    省 NT$ {(getTrialOriginalPrice() - getTrialPrice()).toLocaleString()}
+                  </p>
                 </div>
               )}
             </div>

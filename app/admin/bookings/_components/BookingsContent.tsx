@@ -178,7 +178,7 @@ const BookingsContent = ({ session }: BookingsContentProps) => {
     };
     
     const labels = {
-      trial: '體驗預約',
+      trial: '教練課體驗',
       course: '課程預約',
     };
     
@@ -327,7 +327,7 @@ const BookingsContent = ({ session }: BookingsContentProps) => {
                     className='w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-red-500 focus:border-transparent text-gray-900'
                   >
                     <option value=''>所有類型</option>
-                    <option value='trial'>體驗預約</option>
+                    <option value='trial'>教練課體驗</option>
                     <option value='course'>課程預約</option>
                   </select>
                 </div>
