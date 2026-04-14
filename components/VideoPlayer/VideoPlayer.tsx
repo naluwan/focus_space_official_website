@@ -46,7 +46,7 @@ const VideoPlayer: React.FC<IVideoPlayerProps> = ({ options, id }) => {
   }
 
   return (
-    <div className='relative h-full'>
+    <div className='relative flex h-full w-full items-center justify-center bg-black'>
       {isLoading && (
         <div className='absolute inset-0 flex items-center justify-center bg-gray-900 rounded-lg z-10'>
           <div className='text-center'>
@@ -57,7 +57,7 @@ const VideoPlayer: React.FC<IVideoPlayerProps> = ({ options, id }) => {
       )}
       <video
         key={id}
-        className='w-full h-full object-cover rounded-lg'
+        className='mx-auto block max-h-full max-w-full object-contain rounded-lg'
         controls
         playsInline
         preload='metadata'
@@ -66,7 +66,6 @@ const VideoPlayer: React.FC<IVideoPlayerProps> = ({ options, id }) => {
         onLoadStart={handleLoadStart}
         onCanPlay={handleCanPlay}
         onError={handleError}
-        crossOrigin="anonymous"
       >
         {options.sources?.map((source, index) => (
           <source key={index} src={source.src} type={source.type} />

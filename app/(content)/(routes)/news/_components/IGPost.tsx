@@ -44,6 +44,22 @@ const IGPost = ({
   carouselAlbum,
   isTop,
 }: IGPostProps) => {
+  const getPreviewImage = (): string | null => {
+    if (media_type === 'IMAGE') return media_url;
+    if (media_type === 'VIDEO') return thumbnail_url || null;
+    if (media_type === 'CAROUSEL_ALBUM' && carouselAlbum?.data) {
+      const firstImage = carouselAlbum.data.find((i) => i.media_type === 'IMAGE');
+      if (firstImage) return firstImage.media_url;
+      const firstVideoWithThumb = carouselAlbum.data.find(
+        (i) => i.media_type === 'VIDEO' && i.thumbnail_url,
+      );
+      if (firstVideoWithThumb) return firstVideoWithThumb.thumbnail_url;
+    }
+    return null;
+  };
+
+  const previewImage = getPreviewImage();
+
   return (
     <>
       <Card className='group relative overflow-hidden border-gray-800 bg-gray-900/50 backdrop-blur-sm transition-all duration-500 hover:scale-105 hover:border-red-600/50 hover:shadow-2xl hover:shadow-red-600/20 md:max-h-[600px]'>
@@ -55,17 +71,38 @@ const IGPost = ({
         <CardHeader className='md:max-h-[355px] lg:max-h-[315px] xl:max-h-[450px]'>
           {/* 電腦版post預覽圖 - 只顯示一張 */}
           <div className='hidden overflow-hidden rounded-md md:block md:h-[400px]'>
-            <Image
-              src={
-                media_type === 'VIDEO' ? (thumbnail_url as string) : media_url // IMAGE 和 CAROUSEL_ALBUM 都使用 media_url 作為預覽圖
-              }
-              alt='post image'
-              width={400}
-              height={300}
-              className={cn('h-full w-full object-cover')}
-              priority={isTop}
-              loading={isTop ? 'eager' : 'lazy'}
-            />
+            {previewImage ? (
+              <Image
+                src={previewImage}
+                alt='post image'
+                width={400}
+                height={300}
+                className={cn('h-full w-full object-cover')}
+                priority={isTop}
+                loading={isTop ? 'eager' : 'lazy'}
+                unoptimized
+              />
+            ) : (
+              <div className='flex h-full w-full items-center justify-center bg-gray-800 text-gray-400'>
+                <div className='text-center'>
+                  <svg
+                    className='mx-auto h-12 w-12 mb-2'
+                    fill='none'
+                    stroke='currentColor'
+                    viewBox='0 0 24 24'
+                  >
+                    <path
+                      strokeLinecap='round'
+                      strokeLinejoin='round'
+                      strokeWidth={2}
+                      d='M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z'
+                    />
+                  </svg>
+                  <p className='text-sm'>影片貼文</p>
+                  <p className='text-xs text-gray-500'>點擊查看更多</p>
+                </div>
+              </div>
+            )}
           </div>
           {/* 手機版圖片,影片或輪播圖 */}
           <div className='overflow-hidden rounded-md md:hidden h-[300px]'>
@@ -176,11 +213,11 @@ const IGPost = ({
                 </DialogTrigger>
                 <DialogContent
                   className={cn(
-                    'flex max-h-[750px] max-w-[90%] items-start justify-around bg-gray-900 data-[state=open]:duration-500 max-md:hidden',
+                    'flex max-h-[750px] max-w-[90%] items-center justify-around bg-gray-900 data-[state=open]:duration-500 max-md:hidden',
                   )}
                 >
                   {/* post圖片,影片或輪播圖 */}
-                  <div className='w-full'>
+                  <div className='flex h-[750px] w-full items-center justify-center'>
                     {/* ig圖片 */}
                     {media_type === 'IMAGE' && (
                       <Image
