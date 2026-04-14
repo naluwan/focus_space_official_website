@@ -476,7 +476,7 @@ const Testimonials = () => {
                       className='w-full px-8 py-4 text-lg'
                     >
                       <Heart className='h-5 w-5' />
-                      開始免費體驗
+                      開始體驗
                     </MicroButton>
                     <MicroButton
                       variant='outline'
