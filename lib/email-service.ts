@@ -7,6 +7,7 @@ interface TimeSlot {
 
 interface BookingEmailData {
   bookingType: 'trial' | 'course';
+  trialType?: '1v1' | '1v2';
   customerName: string;
   customerEmail: string;
   customerPhone: string;
@@ -69,15 +70,18 @@ export const sendBookingEmail = async (bookingData: BookingEmailData) => {
 
   // 根據預約類型設定郵件內容
   const isTrialBooking = bookingType === 'trial';
+  const trialTypeLabel =
+    bookingData.trialType === '1v2' ? '1對2教練課體驗' : '1對1教練課體驗';
+  const trialPrice = bookingData.trialType === '1v2' ? 1300 : 1000;
   const subject = isTrialBooking
-    ? 'Focus Space 場館體驗預約確認'
+    ? `Focus Space ${trialTypeLabel}預約確認`
     : 'Focus Space 課程預約確認';
 
   const htmlContent = `
     <div style="font-family: 'Microsoft YaHei', Arial, sans-serif; max-width: 600px; margin: 0 auto; background: #ffffff; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); overflow: hidden;">
       <!-- Header with logo and gym name -->
       <div style="background: linear-gradient(135deg, #e53e3e, #c53030); color: white; padding: 30px 20px; text-align: center;">
-        <img src="https://your-domain.com/logo2.png" alt="Focus Space Logo" style="width: 120px; height: auto; margin: 0 auto 15px auto; display: block;" />
+        <img src="https://www.naluwan.website/logo2.png" alt="Focus Space Logo" style="width: 120px; height: auto; margin: 0 auto 15px auto; display: block;" />
         <h1 style="margin: 0; font-size: 24px; font-weight: bold;">Focus Space 專心練運動空間</h1>
         <h2 style="margin: 10px 0 0 0; font-size: 18px; font-weight: normal; opacity: 0.9;">預約確認通知</h2>
       </div>
@@ -88,7 +92,7 @@ export const sendBookingEmail = async (bookingData: BookingEmailData) => {
           <h3 style="margin: 0 0 15px 0; color: #2d3748; font-size: 18px;">📋 預約資訊</h3>
           <div style="line-height: 1.8; color: #4a5568;">
             <p style="margin: 8px 0;"><strong>預約類型：</strong>${
-              isTrialBooking ? '場館體驗' : '課程預約'
+              isTrialBooking ? trialTypeLabel : '課程預約'
             }</p>
             <p style="margin: 8px 0;"><strong>客戶姓名：</strong>${customerName}</p>
             <p style="margin: 8px 0;"><strong>聯絡電話：</strong>${customerPhone}</p>
@@ -109,11 +113,14 @@ export const sendBookingEmail = async (bookingData: BookingEmailData) => {
             ? `
           <!-- Trial Experience Details -->
           <div style="background: linear-gradient(135deg, #f0fff4, #e6fffa); padding: 25px; border-radius: 12px; margin-bottom: 25px; border-left: 5px solid #48bb78;">
-            <h4 style="margin: 0 0 15px 0; color: #22543d; font-size: 16px;">🎯 場館體驗說明</h4>
+            <h4 style="margin: 0 0 15px 0; color: #22543d; font-size: 16px;">🎯 ${trialTypeLabel}說明</h4>
             <ul style="color: #276749; line-height: 1.6; padding-left: 20px; margin: 0;">
-              <li>體驗時間約 60 分鐘，包含完整場館導覽</li>
-              <li>專業設備介紹與使用說明</li>
-              <li>無任何隱藏費用</li>
+              <li>體驗時間約 60 分鐘，專業教練${
+                bookingData.trialType === '1v2' ? '一對二' : '一對一'
+              }指導</li>
+              <li>高規格身體組成測量（ACCUMIQ BC380）</li>
+              <li>個人化訓練建議與環境參觀導覽</li>
+              <li>首次體驗優惠價 NT$ ${trialPrice}</li>
               <li>可現場了解課程方案與會員優惠</li>
             </ul>
           </div>
@@ -321,13 +328,14 @@ export const sendBookingEmail = async (bookingData: BookingEmailData) => {
               <p style="margin: 8px 0;"><strong>預約類型：</strong><span style="background: ${
                 isTrialBooking ? '#48bb78' : '#e53e3e'
               }; color: white; padding: 2px 8px; border-radius: 4px; font-size: 12px;">${
-      isTrialBooking ? '場館體驗' : '課程預約'
-    }</span></p>
+      isTrialBooking ? trialTypeLabel : '課程預約'
+    }</span>${
+      isTrialBooking
+        ? ` <span style="color: #e53e3e; font-weight: 600;">NT$ ${trialPrice}</span>`
+        : ''
+    }</p>
               <p style="margin: 8px 0;"><strong>客戶姓名：</strong>${customerName}</p>
-              <p style="margin: 8px 0;"><strong>聯絡電話：</strong><a href="tel:+886${customerPhone.replace(
-                /^0/,
-                '',
-              )}" style="color: #e53e3e; text-decoration: none;">${customerPhone}</a></p>
+              <p style="margin: 8px 0;"><strong>聯絡電話：</strong><a href="tel:${customerPhone}" style="color: #e53e3e; text-decoration: none;">${customerPhone}</a></p>
               <p style="margin: 8px 0;"><strong>電子郵件：</strong><a href="mailto:${customerEmail}" style="color: #e53e3e; text-decoration: none;">${customerEmail}</a></p>
               <p style="margin: 8px 0;"><strong>預約時間：</strong>${new Date(
                 createdAt,
@@ -524,17 +532,20 @@ export const sendBookingEmail = async (bookingData: BookingEmailData) => {
           }
 
           <!-- 行動提醒 -->
-          <div style="background: linear-gradient(135deg, #667eea, #764ba2); color: white; padding: 20px; border-radius: 8px; text-align: center;">
-            <h3 style="margin: 0 0 10px 0;">📞 下一步行動</h3>
-            <p style="margin: 0 0 15px 0; opacity: 0.9;">請盡快聯繫客戶安排${
+          <div style="background: linear-gradient(135deg, #667eea, #764ba2); color: white; padding: 24px 20px; border-radius: 8px; text-align: center;">
+            <h3 style="margin: 0 0 8px 0; font-size: 18px;">📞 下一步行動</h3>
+            <p style="margin: 0 0 18px 0; opacity: 0.9; font-size: 14px;">請盡快聯繫客戶安排${
               isTrialBooking ? '體驗' : '課程'
             }時間</p>
-            <div style="margin-top: 15px;">
-              <a href="tel:+886${customerPhone.replace(
-                /^0/,
-                '',
-              )}" style="background: white; color: #667eea; padding: 8px 16px; border-radius: 6px; text-decoration: none; margin: 0 5px; display: inline-block; font-weight: 600;">📞 撥打電話</a>
-              <a href="mailto:${customerEmail}" style="background: white; color: #667eea; padding: 8px 16px; border-radius: 6px; text-decoration: none; margin: 0 5px; display: inline-block; font-weight: 600;">📧 發送郵件</a>
+            <div style="background: white; padding: 16px; border-radius: 6px; display: inline-block; text-align: left;">
+              <p style="margin: 6px 0; color: #2d3748; font-size: 15px;">
+                <span style="color: #667eea;">📞</span>
+                <a href="tel:${customerPhone}" style="color: #667eea; text-decoration: none; font-weight: 600;">${customerPhone}</a>
+              </p>
+              <p style="margin: 6px 0; color: #2d3748; font-size: 15px;">
+                <span style="color: #667eea;">✉️</span>
+                <a href="mailto:${customerEmail}" style="color: #667eea; text-decoration: none; font-weight: 600;">${customerEmail}</a>
+              </p>
             </div>
           </div>
         </div>
