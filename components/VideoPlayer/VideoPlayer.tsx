@@ -63,13 +63,12 @@ const VideoPlayer: React.FC<IVideoPlayerProps> = ({ options, id }) => {
         preload='metadata'
         poster={options.poster}
         autoPlay={options.autoplay}
+        src={options.sources?.[0]?.src}
         onLoadStart={handleLoadStart}
         onCanPlay={handleCanPlay}
+        onLoadedMetadata={handleCanPlay}
         onError={handleError}
       >
-        {options.sources?.map((source, index) => (
-          <source key={index} src={source.src} type={source.type} />
-        ))}
         <track kind='captions' />
       </video>
     </div>

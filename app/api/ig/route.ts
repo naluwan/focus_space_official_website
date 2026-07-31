@@ -4,7 +4,8 @@ import { getTokenManager } from '@/lib/token-manager';
 
 export interface PostType {
   caption?: string;
-  media_url: string;
+  // IG API 對部分影片(如 Reels)不會回傳 media_url
+  media_url?: string;
   timestamp: string;
   id: string;
   permalink: string;

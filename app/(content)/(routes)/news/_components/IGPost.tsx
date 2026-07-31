@@ -11,13 +11,51 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from '@/components/ui/carousel';
-import { ArrowUpRightFromCircle } from 'lucide-react';
+import { ArrowUpRightFromCircle, Play } from 'lucide-react';
 import { cn } from '@/lib/utils';
+
+// 透過自家伺服器代理 IG CDN 影片,避免行動裝置瀏覽器直接請求被 CDN 拒絕
+const proxiedVideoUrl = (url: string) => `/api/ig-media?url=${encodeURIComponent(url)}`;
+
+// IG API 對含版權音樂的影片(如 Reels)不回傳 media_url,改顯示縮圖並導向 Instagram 觀看
+const VideoUnavailable = ({
+  thumbnail,
+  permalink,
+}: {
+  thumbnail?: string;
+  permalink: string;
+}) => (
+  <a
+    href={permalink}
+    target='_blank'
+    rel='noreferrer'
+    className='relative block h-full w-full'
+  >
+    {thumbnail ? (
+      <Image
+        src={thumbnail}
+        alt='video thumbnail'
+        width={400}
+        height={300}
+        className='h-full w-full object-cover'
+        unoptimized
+      />
+    ) : (
+      <div className='h-full w-full bg-gray-800' />
+    )}
+    <div className='absolute inset-0 flex flex-col items-center justify-center gap-2 bg-black/40'>
+      <div className='rounded-full bg-gradient-to-r from-red-600 to-yellow-500 p-4'>
+        <Play className='h-8 w-8 fill-white text-white' />
+      </div>
+      <p className='text-sm text-white'>點擊前往 Instagram 觀看影片</p>
+    </div>
+  </a>
+);
 
 interface IGPostProps {
   id: string;
   caption?: string;
-  media_url: string;
+  media_url?: string;
   timestamp: string;
   permalink: string;
   media_type: 'IMAGE' | 'VIDEO' | 'CAROUSEL_ALBUM';
@@ -45,7 +83,7 @@ const IGPost = ({
   isTop,
 }: IGPostProps) => {
   const getPreviewImage = (): string | null => {
-    if (media_type === 'IMAGE') return media_url;
+    if (media_type === 'IMAGE') return media_url || null;
     if (media_type === 'VIDEO') return thumbnail_url || null;
     if (media_type === 'CAROUSEL_ALBUM' && carouselAlbum?.data) {
       const firstImage = carouselAlbum.data.find((i) => i.media_type === 'IMAGE');
@@ -107,7 +145,7 @@ const IGPost = ({
           {/* 手機版圖片,影片或輪播圖 */}
           <div className='overflow-hidden rounded-md md:hidden h-[300px]'>
             {/* ig圖片 */}
-            {media_type === 'IMAGE' && (
+            {media_type === 'IMAGE' && media_url && (
               <Image
                 src={media_url}
                 alt='post image'
@@ -119,17 +157,20 @@ const IGPost = ({
             )}
 
             {/* ig影片 */}
-            {media_type === 'VIDEO' && (
-              <VideoPlayer
-                key={`mobile-${id}`}
-                id={`mobile-${id}`}
-                options={{
-                  sources: [{ src: media_url, type: 'video/mp4' }],
-                  autoplay: false,
-                  poster: thumbnail_url,
-                }}
-              />
-            )}
+            {media_type === 'VIDEO' &&
+              (media_url ? (
+                <VideoPlayer
+                  key={`mobile-${id}`}
+                  id={`mobile-${id}`}
+                  options={{
+                    sources: [{ src: proxiedVideoUrl(media_url), type: 'video/mp4' }],
+                    autoplay: false,
+                    poster: thumbnail_url,
+                  }}
+                />
+              ) : (
+                <VideoUnavailable thumbnail={thumbnail_url} permalink={permalink} />
+              ))}
 
             {/* ig多張圖片或影片輪播 */}
             {media_type === 'CAROUSEL_ALBUM' && (
@@ -149,20 +190,27 @@ const IGPost = ({
                       </CarouselItem>
                     ) : (
                       <CarouselItem key={item.id}>
-                        <VideoPlayer
-                          key={`mobile-album-${item.id}`}
-                          id={`mobile-album-${item.id}`}
-                          options={{
-                            sources: [
-                              {
-                                src: item.media_url,
-                                type: 'video/mp4',
-                              },
-                            ],
-                            poster: item.thumbnail_url,
-                            autoplay: false,
-                          }}
-                        />
+                        {item.media_url ? (
+                          <VideoPlayer
+                            key={`mobile-album-${item.id}`}
+                            id={`mobile-album-${item.id}`}
+                            options={{
+                              sources: [
+                                {
+                                  src: proxiedVideoUrl(item.media_url),
+                                  type: 'video/mp4',
+                                },
+                              ],
+                              poster: item.thumbnail_url,
+                              autoplay: false,
+                            }}
+                          />
+                        ) : (
+                          <VideoUnavailable
+                            thumbnail={item.thumbnail_url}
+                            permalink={permalink}
+                          />
+                        )}
                       </CarouselItem>
                     );
                   })}
@@ -219,7 +267,7 @@ const IGPost = ({
                   {/* post圖片,影片或輪播圖 */}
                   <div className='flex h-[750px] w-full items-center justify-center'>
                     {/* ig圖片 */}
-                    {media_type === 'IMAGE' && (
+                    {media_type === 'IMAGE' && media_url && (
                       <Image
                         src={media_url}
                         alt='post image'
@@ -231,17 +279,25 @@ const IGPost = ({
                     )}
 
                     {/* ig影片 */}
-                    {media_type === 'VIDEO' && (
-                      <VideoPlayer
-                        key={`web-${id}`}
-                        id={`web-${id}`}
-                        options={{
-                          sources: [{ src: media_url, type: 'video/mp4' }],
-                          poster: thumbnail_url,
-                          autoplay: true,
-                        }}
-                      />
-                    )}
+                    {media_type === 'VIDEO' &&
+                      (media_url ? (
+                        <VideoPlayer
+                          key={`web-${id}`}
+                          id={`web-${id}`}
+                          options={{
+                            sources: [
+                              { src: proxiedVideoUrl(media_url), type: 'video/mp4' },
+                            ],
+                            poster: thumbnail_url,
+                            autoplay: true,
+                          }}
+                        />
+                      ) : (
+                        <VideoUnavailable
+                          thumbnail={thumbnail_url}
+                          permalink={permalink}
+                        />
+                      ))}
 
                     {/* ig多張圖片或影片輪播 */}
                     {media_type === 'CAROUSEL_ALBUM' && (
@@ -261,15 +317,27 @@ const IGPost = ({
                               </CarouselItem>
                             ) : (
                               <CarouselItem key={item.id}>
-                                <VideoPlayer
-                                  key={`web-album-${item.id}`}
-                                  id={`web-album-${item.id}`}
-                                  options={{
-                                    sources: [{ src: item.media_url, type: 'video/mp4' }],
-                                    poster: item.thumbnail_url,
-                                    autoplay: false,
-                                  }}
-                                />
+                                {item.media_url ? (
+                                  <VideoPlayer
+                                    key={`web-album-${item.id}`}
+                                    id={`web-album-${item.id}`}
+                                    options={{
+                                      sources: [
+                                        {
+                                          src: proxiedVideoUrl(item.media_url),
+                                          type: 'video/mp4',
+                                        },
+                                      ],
+                                      poster: item.thumbnail_url,
+                                      autoplay: false,
+                                    }}
+                                  />
+                                ) : (
+                                  <VideoUnavailable
+                                    thumbnail={item.thumbnail_url}
+                                    permalink={permalink}
+                                  />
+                                )}
                               </CarouselItem>
                             );
                           })}
