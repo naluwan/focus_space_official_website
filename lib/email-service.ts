@@ -97,7 +97,7 @@ export const sendBookingEmail = async (bookingData: BookingEmailData) => {
             <p style="margin: 8px 0;"><strong>客戶姓名：</strong>${customerName}</p>
             <p style="margin: 8px 0;"><strong>聯絡電話：</strong>${customerPhone}</p>
             <p style="margin: 8px 0;"><strong>電子郵件：</strong>${customerEmail}</p>
-            <p style="margin: 8px 0;"><strong>預約時間：</strong>${new Date(
+            <p style="margin: 8px 0;"><strong>送出時間：</strong>${new Date(
               createdAt,
             ).toLocaleString('zh-TW')}</p>
             ${
@@ -339,7 +339,7 @@ export const sendBookingEmail = async (bookingData: BookingEmailData) => {
               <p style="margin: 8px 0;"><strong>客戶姓名：</strong>${customerName}</p>
               <p style="margin: 8px 0;"><strong>聯絡電話：</strong><a href="tel:${customerPhone}" style="color: #e53e3e; text-decoration: none;">${customerPhone}</a></p>
               <p style="margin: 8px 0;"><strong>電子郵件：</strong><a href="mailto:${customerEmail}" style="color: #e53e3e; text-decoration: none;">${customerEmail}</a></p>
-              <p style="margin: 8px 0;"><strong>預約時間：</strong>${new Date(
+              <p style="margin: 8px 0;"><strong>送出時間：</strong>${new Date(
                 createdAt,
               ).toLocaleString('zh-TW')}</p>
               ${
