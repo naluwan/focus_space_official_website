@@ -116,9 +116,18 @@ const TimeSlotSelection: React.FC<TimeSlotSelectionProps> = ({
   return (
     <div>
       <h2 className="text-2xl font-bold text-gray-900 mb-6">
-        {isGroupCourse ? '課程時間資訊' : '選擇預約時間'}
+        {isGroupCourse ? '課程時間資訊' : '選擇偏好時段'}
       </h2>
-      
+
+      {!isGroupCourse && (
+        <div className="mb-6 flex items-start gap-2 bg-amber-50 border border-amber-200 rounded-xl p-4 text-sm text-amber-800">
+          <AlertCircle className="w-5 h-5 flex-shrink-0 mt-0.5" />
+          <p>
+            您在此選擇的日期與時段為<strong>預約偏好時間</strong>，並非最終確定的上課時間。實際上課時間將由專業顧問依教練與場地空檔，盡力為您安排並致電確認。
+          </p>
+        </div>
+      )}
+
       {/* 團體課程：顯示固定時間資訊 */}
       {isGroupCourse && bookingData.courseStartDate && (
         <div className="mb-8 bg-white border border-gray-200 rounded-2xl p-6 shadow-sm">
@@ -309,8 +318,9 @@ const TimeSlotSelection: React.FC<TimeSlotSelectionProps> = ({
       {!isGroupCourse && bookingData.bookingDate && bookingData.startTime && (
         <div className="mt-6 p-4 bg-white border border-gray-200 rounded-xl shadow-sm">
           <p className="text-gray-800 font-semibold">
-            已選擇：{new Date(bookingData.bookingDate).toLocaleDateString('zh-TW')} {bookingData.startTime} - {bookingData.endTime}
+            已選擇偏好時段：{new Date(bookingData.bookingDate).toLocaleDateString('zh-TW')} {bookingData.startTime} - {bookingData.endTime}
           </p>
+          <p className="text-gray-500 text-xs mt-1">實際上課時間將依場館空檔安排，我們會盡快與您確認</p>
         </div>
       )}
     </div>

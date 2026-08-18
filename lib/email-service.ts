@@ -217,7 +217,7 @@ export const sendBookingEmail = async (bookingData: BookingEmailData) => {
                 ${
                   bookingData.bookingDate && bookingData.startTime && bookingData.endTime
                     ? `
-                  <h5 style="margin: 15px 0 10px 0; color: #742a2a; font-size: 16px;">⏰ 預約時間</h5>
+                  <h5 style="margin: 15px 0 10px 0; color: #742a2a; font-size: 16px;">⏰ 預約時間（偏好時段）</h5>
                   <div style="line-height: 1.8; color: #4a5568;">
                     <p style="margin: 8px 0;"><strong>預約日期：</strong>${new Date(
                       bookingData.bookingDate,
@@ -225,6 +225,7 @@ export const sendBookingEmail = async (bookingData: BookingEmailData) => {
                     <p style="margin: 8px 0;"><strong>預約時段：</strong>${
                       bookingData.startTime
                     } - ${bookingData.endTime}</p>
+                    <p style="margin: 8px 0; font-size: 13px; color: #975a16;">※ 以上為您提供的偏好時段，並非最終確定時間，實際上課時間將由專業顧問依教練與場地空檔，盡力為您安排並致電確認。</p>
                   </div>
                 `
                     : ''
@@ -268,6 +269,7 @@ export const sendBookingEmail = async (bookingData: BookingEmailData) => {
         <div style="background: linear-gradient(135deg, #fffbf0, #fef5e7); padding: 25px; border-radius: 12px; margin-bottom: 25px; border-left: 5px solid #d69e2e;">
           <h4 style="margin: 0 0 15px 0; color: #744210; font-size: 16px;">⚠️ 重要注意事項</h4>
           <ul style="color: #975a16; line-height: 1.6; padding-left: 20px; margin: 0;">
+            <li>您所填寫/選擇的日期與時段為<strong>預約偏好時間</strong>，並非最終確定時間，實際時間將依教練與場地空檔盡力為您安排</li>
             <li>請攜帶運動服裝、毛巾及運動鞋</li>
             <li>如需更換時間，請提前 24 小時聯繫我們</li>
             <li>首次來訪建議提前 10 分鐘到達</li>
@@ -451,9 +453,9 @@ export const sendBookingEmail = async (bookingData: BookingEmailData) => {
                 bookingData.bookingDate && bookingData.startTime && bookingData.endTime
                   ? `
                 <div style="background: #fff5f5; padding: 15px; border-radius: 6px; margin: 15px 0; border: 1px solid #fed7d7;">
-                  <h4 style="margin: 0 0 10px 0; color: #c53030; font-size: 14px;">⏰ 客戶指定預約時間</h4>
+                  <h4 style="margin: 0 0 10px 0; color: #c53030; font-size: 14px;">⏰ 客戶偏好預約時間（非最終確定）</h4>
                   <div style="line-height: 1.6; color: #4a5568; font-size: 14px;">
-                    <p style="margin: 5px 0;"><strong>預約日期：</strong><span style="color: #c53030; font-weight: 600;">${new Date(
+                    <p style="margin: 5px 0;"><strong>偏好日期：</strong><span style="color: #c53030; font-weight: 600;">${new Date(
                       bookingData.bookingDate,
                     ).toLocaleDateString('zh-TW', {
                       weekday: 'long',
@@ -461,9 +463,10 @@ export const sendBookingEmail = async (bookingData: BookingEmailData) => {
                       month: 'long',
                       day: 'numeric',
                     })}</span></p>
-                    <p style="margin: 5px 0;"><strong>預約時段：</strong><code style="background: #c53030; color: white; padding: 2px 6px; border-radius: 4px;">${
+                    <p style="margin: 5px 0;"><strong>偏好時段：</strong><code style="background: #c53030; color: white; padding: 2px 6px; border-radius: 4px;">${
                       bookingData.startTime
                     } - ${bookingData.endTime}</code></p>
+                    <p style="margin: 5px 0; font-size: 12px; color: #975a16;">請依場館與教練實際空檔安排時間，再致電客戶確認最終時段。</p>
                   </div>
                 </div>
               `

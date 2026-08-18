@@ -219,7 +219,10 @@ const TrialBookingForm: React.FC<TrialBookingComponentProps> = ({
             <Clock className="w-5 h-5 text-brand-red-500" />
             偏好時間
           </h3>
-          
+          <p className="text-gray-500 text-xs mb-4">
+            此為您希望的預約時段，並非最終確定時間，實際體驗時間將依教練與場地空檔，盡力為您安排並致電確認。
+          </p>
+
           <div className="grid md:grid-cols-2 gap-4">
             {/* 偏好日期 */}
             <div>

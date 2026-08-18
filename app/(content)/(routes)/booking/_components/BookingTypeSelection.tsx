@@ -1,6 +1,6 @@
 'use client';
 
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Heart, Calendar, CheckCircle } from 'lucide-react';
 
 import type { BookingComponentProps } from '@/types/booking';
@@ -9,11 +9,53 @@ interface BookingTypeSelectionProps extends BookingComponentProps {}
 
 type SelectionId = 'trial-1v1' | 'trial-1v2' | 'course';
 
+interface AvailabilityCheckCourse {
+  category: 'personal' | 'group' | 'special';
+  startDate: string;
+  endDate: string;
+  allowLateEnrollment?: boolean;
+}
+
 const BookingTypeSelection: React.FC<BookingTypeSelectionProps> = ({
   bookingData,
   setBookingData,
   errors,
 }) => {
+  const [hasAvailableCourses, setHasAvailableCourses] = useState(false);
+
+  useEffect(() => {
+    const checkCourseAvailability = async () => {
+      try {
+        const response = await fetch('/api/courses');
+        if (!response.ok) return;
+
+        const data = await response.json();
+        const courses: AvailabilityCheckCourse[] = data.data || [];
+
+        const today = new Date();
+        today.setHours(0, 0, 0, 0);
+
+        const isAvailable = courses.some((course) => {
+          if (course.category === 'personal') return true;
+
+          const courseStartDate = new Date(course.startDate);
+          const courseEndDate = new Date(course.endDate);
+
+          if (today > courseEndDate) return false;
+          if (today < courseStartDate) return true;
+
+          return course.allowLateEnrollment === true;
+        });
+
+        setHasAvailableCourses(isAvailable);
+      } catch (error) {
+        // 靜默處理錯誤，維持預設隱藏「課程預約」選項
+      }
+    };
+
+    checkCourseAvailability();
+  }, []);
+
   const handleTypeSelect = (id: SelectionId) => {
     if (id === 'course') {
       setBookingData({
@@ -100,6 +142,10 @@ const BookingTypeSelection: React.FC<BookingTypeSelectionProps> = ({
     },
   ];
 
+  const visibleBookingTypes = hasAvailableCourses
+    ? bookingTypes
+    : bookingTypes.filter((type) => type.id !== 'course');
+
   const currentSelectionId: SelectionId | undefined =
     bookingData.bookingType === 'course'
       ? 'course'
@@ -114,8 +160,12 @@ const BookingTypeSelection: React.FC<BookingTypeSelectionProps> = ({
       <h2 className='mb-2 text-2xl font-bold text-gray-900'>選擇預約類型</h2>
       <p className='mb-8 text-gray-600'>請選擇您想要預約的服務類型</p>
 
-      <div className='grid gap-6 md:grid-cols-3'>
-        {bookingTypes.map((type) => {
+      <div
+        className={`grid gap-6 ${
+          visibleBookingTypes.length >= 3 ? 'md:grid-cols-3' : 'md:grid-cols-2'
+        }`}
+      >
+        {visibleBookingTypes.map((type) => {
           const Icon = type.icon;
           const isSelected = currentSelectionId === type.id;
 

@@ -187,7 +187,7 @@ const BookingConfirmation: React.FC<BookingConfirmationProps> = ({
           <div className="bg-white border border-gray-200 rounded-2xl p-6 shadow-sm">
             <div className="flex items-center gap-3 mb-4">
               <Calendar className="w-6 h-6 text-brand-red-500" />
-              <h3 className="text-xl font-semibold text-gray-900">預約時間</h3>
+              <h3 className="text-xl font-semibold text-gray-900">預約時間（偏好時段）</h3>
             </div>
             <div className="border border-gray-200 rounded-xl p-6">
               <div className="flex items-center justify-between">
@@ -209,6 +209,9 @@ const BookingConfirmation: React.FC<BookingConfirmationProps> = ({
                 </div>
               </div>
             </div>
+            <p className="text-gray-500 text-xs mt-3">
+              以上為您的偏好時段，並非最終確定時間，實際上課時間將依教練與場地空檔安排，專業顧問確認後會另行通知您
+            </p>
           </div>
         )}
 
@@ -233,6 +236,9 @@ const BookingConfirmation: React.FC<BookingConfirmationProps> = ({
                 </div>
               )}
             </div>
+            <p className="text-gray-500 text-xs mt-3">
+              以上為您的偏好時間，並非最終確定時間，實際體驗時間將依教練與場地空檔安排，專業顧問確認後會另行通知您
+            </p>
           </div>
         )}
 
@@ -369,6 +375,7 @@ const BookingConfirmation: React.FC<BookingConfirmationProps> = ({
           <div className="text-gray-800 text-sm space-y-2">
             <p>• 送出預約後，系統將立即發送確認信到您的信箱</p>
             <p>• 專業顧問會在24小時內致電與您確認詳細資訊</p>
+            <p>• 您所選擇/填寫的日期與時段為預約偏好時間，並非最終確定時間，實際上課時間將依教練與場地空檔盡力為您安排</p>
             {bookingData.bookingType === 'trial' && (
               <p>• 體驗當天請攜帶運動服裝和毛巾，其他設備我們會提供</p>
             )}

@@ -149,7 +149,9 @@ const CustomerInfo: React.FC<CustomerInfoProps> = ({
             </div>
             <div className="flex items-start gap-3">
               <div className="w-6 h-6 bg-blue-500 text-white rounded-full flex items-center justify-center text-xs font-bold mt-0.5">2</div>
-              <p>專業顧問將在24小時內致電與您確認預約詳情</p>
+              <p>
+                專業顧問將在24小時內致電與您確認預約詳情，您所選擇的日期與時段為<strong>偏好時間</strong>，並非最終確定的時間，將依教練與場地空檔盡力為您安排
+              </p>
             </div>
             <div className="flex items-start gap-3">
               <div className="w-6 h-6 bg-blue-500 text-white rounded-full flex items-center justify-center text-xs font-bold mt-0.5">3</div>
